@@ -18,20 +18,6 @@ set(GRAPH_SOURCES
         src/Graph/Graph.cc
         src/Graph/Graph.h
 )
-set(GRAPH_ALGORITHMS_SOURCES
-        src/GraphAlgorithms/GraphAlgorithms.cc
-        src/GraphAlgorithms/GraphAlgorithms.h)
-set(CONTAINERS_SOURCES
-        src/containers/adaptors/Queue/Queue.h
-        src/containers/adaptors/Stack/Stack.h
-        src/containers/sequence/List/List.h)
-
-set(COMMON_TEST_SOURCES
-        tests/tests.cc)
-set(GRAPH_TEST_SOURCES
-        tests/s21_graph_tests.cc)
-set(GRAPH_ALGORITHMS_TEST_SOURCES
-        tests/s21_graph_algorithms_tests.cc)
 
 set(ALGORITHM_1_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.cc
@@ -45,14 +31,34 @@ set(COLONY_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
 )
+set(GRAPH_ALGORITHMS_SOURCES
+        src/GraphAlgorithms/GraphAlgorithms.cc
+        src/GraphAlgorithms/GraphAlgorithms.h
+        ${ALGORITHM_1_SOURCES}
+        ${ALGORITHM_2_SOURCES}
+        ${COLONY_ALGORITHM_SOURCES}
+)
+set(CONTAINERS_SOURCES
+        src/containers/adaptors/Queue/Queue.h
+        src/containers/adaptors/Stack/Stack.h
+        src/containers/sequence/List/List.h)
+
+set(COMMON_TEST_SOURCES
+        tests/tests.cc)
+set(GRAPH_TEST_SOURCES
+        tests/s21_graph_tests.cc)
+set(GRAPH_ALGORITHMS_TEST_SOURCES
+        tests/s21_graph_algorithms_tests.cc)
+
+set(COMMON_SOURCES
+        src/common/structs.h
+)
 
 add_executable(s21_graph_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
-        ${ALGORITHM_1_SOURCES}
-        ${ALGORITHM_2_SOURCES}
-        ${COLONY_ALGORITHM_SOURCES}
+        ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
         ${GRAPH_TEST_SOURCES}
 )
@@ -60,9 +66,7 @@ add_executable(s21_graph_algorithms_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
-        ${ALGORITHM_1_SOURCES}
-        ${ALGORITHM_2_SOURCES}
-        ${COLONY_ALGORITHM_SOURCES}
+        ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_TEST_SOURCES}
 )
@@ -71,15 +75,25 @@ add_executable(s21_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
-        ${ALGORITHM_1_SOURCES}
-        ${ALGORITHM_2_SOURCES}
-        ${COLONY_ALGORITHM_SOURCES}
+        ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
         ${GRAPH_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_TEST_SOURCES}
-        src/common/structs.h
 )
 
-target_link_libraries(s21_graph_test gtest_main)
-target_link_libraries(s21_graph_algorithms_test gtest_main)
-target_link_libraries(s21_test gtest_main)
+target_link_libraries(s21_graph_algorithms_test gtest_main s21_graph s21_graph_algorithms)
+target_link_libraries(s21_graph_test gtest_main s21_graph s21_graph_algorithms)
+target_link_libraries(s21_test gtest_main s21_graph s21_graph_algorithms)
+
+add_library(s21_graph STATIC
+    ${GRAPH_SOURCES}
+    ${COMMON_SOURCES}
+)
+
+add_library(s21_graph_algorithms STATIC
+        ${GRAPH_ALGORITHMS_SOURCES}
+        ${ALGORITHM_1_SOURCES}
+        ${ALGORITHM_2_SOURCES}
+        ${COLONY_ALGORITHM_SOURCES}
+        ${COMMON_SOURCES}
+)

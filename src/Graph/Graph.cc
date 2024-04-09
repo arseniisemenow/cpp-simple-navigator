@@ -51,6 +51,26 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
     }
 }
 void Graph::ExportGraphToDot(const std::string &filename) {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << filename << std::endl;
+        return;
+    }
+
+    // Write the header
+    file << "graph G {\n";
+
+    // Write the edges based on the adjacency matrix
+    for (size_t i = 0; i < adjacency_matrix_.size(); ++i) {
+        for (size_t j = i; j < adjacency_matrix_[i].size(); ++j) {
+            if (adjacency_matrix_[i][j] != 0) {
+                file << i << " -- " << j << " [label=\"" << adjacency_matrix_[i][j] << "\"];\n";
+            }
+        }
+    }
+
+    // Write the footer
+    file << "}\n";
 }
 
 std::vector<std::vector<int>> Graph::GetGraph() {

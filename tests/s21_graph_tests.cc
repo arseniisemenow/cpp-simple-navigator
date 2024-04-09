@@ -1,9 +1,13 @@
 #include <gtest/gtest.h>
+#include <fstream>
 
 #include "Graph/Graph.h"
 
 inline const std::string kFileNames[] = {
     "tests/datasets/graph_1.txt",
+};
+inline const std::string kFileNamesDot[] = {
+    "tests/datasets/graph_1.dot",
 };
 
 namespace s21 {
@@ -13,7 +17,7 @@ class GraphTest : public ::testing::Test {
     Graph graph_{};
 };
 
-TEST_F(GraphTest, Test) {
+TEST_F(GraphTest, LoadGraphFromFileTest1) {
     graph_.LoadGraphFromFile(kFileNames[0]);
     auto adjacency_matrix = graph_.GetGraph();
     std::vector<std::vector<int>> expected_matrix{
@@ -30,6 +34,12 @@ TEST_F(GraphTest, Test) {
         {18,  12,  13,  25,  22,  37,  84,  13,  18,  38,  0,},
     };
     ASSERT_EQ(adjacency_matrix, expected_matrix);
+}
+TEST_F(GraphTest, ExportGraphToDotTest1) {
+    graph_.LoadGraphFromFile(kFileNames[0]);
+    graph_.ExportGraphToDot(kFileNamesDot[0]);
+    std::ifstream file(kFileNamesDot[0]);
+    ASSERT_TRUE(file.is_open());
 }
 
 }// namespace s21
