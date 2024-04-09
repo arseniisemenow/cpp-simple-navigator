@@ -4,6 +4,6 @@
 
 namespace s21 {
 TspResult Algorithm1::SolveTravelingSalesmanProblem(const Graph &graph) {
-    return 0;
+    return {};
 }
 }// namespace s21

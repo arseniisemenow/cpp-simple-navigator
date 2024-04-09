@@ -9,8 +9,10 @@ class Graph {
  public:
     void LoadGraphFromFile(const std::string& filename);
     void ExportGraphToDot(const std::string& filename);
+    [[nodiscard]] std::vector<std::vector<int>> GetGraph();
+    void SetGraph(const std::vector<std::vector<int>>& adjacency_matrix);
  private:
-    std::vector<std::vector<bool>> adjacency_matrix_{};
+    std::vector<std::vector<int>> adjacency_matrix_{};
 };
 
 }// namespace s21

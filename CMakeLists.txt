@@ -50,27 +50,30 @@ add_executable(s21_graph_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
+        ${ALGORITHM_1_SOURCES}
+        ${ALGORITHM_2_SOURCES}
+        ${COLONY_ALGORITHM_SOURCES}
+        ${COMMON_TEST_SOURCES}
         ${GRAPH_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
+        ${ALGORITHM_1_SOURCES}
+        ${ALGORITHM_2_SOURCES}
+        ${COLONY_ALGORITHM_SOURCES}
         ${COMMON_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_TEST_SOURCES}
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.cc
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.h
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.cc
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.h
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.cc
 )
 
 add_executable(s21_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${CONTAINERS_SOURCES}
+        ${ALGORITHM_1_SOURCES}
+        ${ALGORITHM_2_SOURCES}
+        ${COLONY_ALGORITHM_SOURCES}
         ${COMMON_TEST_SOURCES}
         ${GRAPH_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_TEST_SOURCES}

@@ -4,7 +4,6 @@
 #include <array>
 
 #include "Graph/Graph.h"
-#include "Vertex/Vertex.h"
 #include "common/structs.h"
 #include "GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.h"
 #include "GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.h"
