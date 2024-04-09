@@ -224,9 +224,9 @@ Implementation of the _s21_graph_algorithms.h_ library:
 
 * Add a new method to the `GraphAlgorithms` class:
     + `SolveTravelingSalesmanProblem(Graph &graph)` — solving the traveling salesman's problem using the *ant colony algorithm*.
-You need to find the shortest path that goes through all vertices of the graph at least once, followed by a return to the original vertex. As a result, the function should return the `TsmResult` structure described below:
+You need to find the shortest path that goes through all vertices of the graph at least once, followed by a return to the original vertex. As a result, the function should return the `TspResult` structure described below:
     ```cpp
-    struct TsmResult {
+    struct TspResult {
         int* vertices;    // an array with the route you are looking for (with the vertex traverse order). Instead of int* you can use std::vector<int>
         double distance;  // the length of this route
     }
