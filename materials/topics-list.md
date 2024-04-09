@@ -1,8 +1,8 @@
-# Topics list
+# Topics List
 
 Hello, School21 student! 😉
 
-To help you navigate through the material, we have prepared a list of topics that you will learn in this project.
+To help you navigate through the material, we have prepared a List of topics that you will learn in this project.
 
 We will learn:
 

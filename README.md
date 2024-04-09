@@ -163,7 +163,7 @@ An example of representing a graph with an adjacency matrix can be found in the 
 
 If the number of graph edges is small compared to the number of vertices, the values of most elements of the adjacency matrix will be 0. In this case it is not reasonable to use this method. For such graphs there are more appropriate ways to represent them:
 
-* *An adjacency list* is one way to represent a graph as a collection of lists of vertices. Each vertex of the graph corresponds to a list of "neighbors" (i.e., vertices that are directly reachable from the current vertex) of that vertex, with edge weights.
+* *An adjacency List* is one way to represent a graph as a collection of lists of vertices. Each vertex of the graph corresponds to a List of "neighbors" (i.e., vertices that are directly reachable from the current vertex) of that vertex, with edge weights.
 * *List of edges* is a table (matrix of dimension Nx3), each row of which contains two adjacent vertices and the weight of the edge connecting them.
 
 ## Chapter III
@@ -196,16 +196,16 @@ Implementation of the _s21_graph_algorithms.h_ library:
 * Add to the Makefile _s21_graph_algorithms_ target. 
 * Prepare full coverage of the `GraphAlgorithms` class methods with unit-tests.
 * The class ` GraphAlgorithms ` must contain at least the following public methods:
-    + `DepthFirstSearch(Graph &graph, int start_vertex)` — a *non-recursive* depth-first search in the graph from a given vertex. The function should return an array that contains the traversed vertices in the order they were traversed. When implementing this function, you must use the *self-written* data structure **stack**, which should be previously made as a separate static library.
-    + `BreadthFirstSearch(Graph &graph, int start_vertex)` — breadth-first search in the graph from a given vertex. The function should return an array that contains the traversed vertices in the order they were traversed. When implementing this function, you must use the *self-written* data structure **queue**, which should be previously made as a separate static library.
+    + `DepthFirstSearch(Graph &graph, int start_vertex)` — a *non-recursive* depth-first search in the graph from a given vertex. The function should return an array that contains the traversed vertices in the order they were traversed. When implementing this function, you must use the *self-written* data structure **Stack**, which should be previously made as a separate static library.
+    + `BreadthFirstSearch(Graph &graph, int start_vertex)` — breadth-first search in the graph from a given vertex. The function should return an array that contains the traversed vertices in the order they were traversed. When implementing this function, you must use the *self-written* data structure **Queue**, which should be previously made as a separate static library.
 * It is necessary to adapt previously created *self-written* helper classes `Stack` and `Queue` (you can reuse your solution from the *CPP2* project for this) and implement interfaces for them in C++. These classes must contain the following methods:
-    + `stack()` — creating an empty stack;
-    + `queue()` — creating an empty queue;
-    + `push(value)` — adding an element to the stack/queue;
-    + `pop()` — getting an element from the stack/queue followed by its removal from the stack/queue;
-    + `top()` — getting an element from the stack without its removal from the stack;
-    + `front()` — getting the first element from the queue without its removal from the queue;
-    + `back()` — getting the last element from the queue without its removal from the queue.
+    + `Stack()` — creating an empty Stack;
+    + `Queue()` — creating an empty Queue;
+    + `push(value)` — adding an element to the Stack/Queue;
+    + `pop()` — getting an element from the Stack/Queue followed by its removal from the Stack/Queue;
+    + `top()` — getting an element from the Stack without its removal from the Stack;
+    + `front()` — getting the first element from the Queue without its removal from the Queue;
+    + `back()` — getting the last element from the Queue without its removal from the Queue.
 
 *In this and the following tasks, consider that the vertex numbers start from 1.*
 

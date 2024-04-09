@@ -6,7 +6,7 @@ Graphs described in the DOT language are represented graphically using special p
 
 ## Example of an undirected graph in the DOT language
 
-An undirected graph in DOT is described by a list of vertices and edges represented by the name of vertices, and a double dash (--) between connected vertices.
+An undirected graph in DOT is described by a List of vertices and edges represented by the name of vertices, and a double dash (--) between connected vertices.
 
 ```dot
 graph graphname {
@@ -33,7 +33,7 @@ graph graphname {
 
 ## Example of a directed graph in the DOT language
 
-A directed graph in DOT is described by a list of vertices and edges, represented by the names of vertices, and a dash with triangular bracket - arrow (->), between the connected vertices:
+A directed graph in DOT is described by a List of vertices and edges, represented by the names of vertices, and a dash with triangular bracket - arrow (->), between the connected vertices:
 
 ```dot
 digraph graphname {
