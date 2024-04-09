@@ -17,7 +17,15 @@ std::vector<std::vector<bool>> GraphAlgorithms::GetLeastSpanningTree(const Graph
     return std::vector<std::vector<bool>>();
 }
 TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, const AlgorithmType algorithm_type) {
-    return TspResult();
+    if (algorithm_type == kColonyAlgorithm){
+        return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
+    }else if (algorithm_type == kAlgorithm1){
+        return algorithm_1_.SolveTravelingSalesmanProblem(graph);
+    }else if (algorithm_type == kAlgorithm2){
+        return algorithm_2_.SolveTravelingSalesmanProblem(graph);
+    } else {
+        return {};
+    }
 }
 
 }// namespace s21

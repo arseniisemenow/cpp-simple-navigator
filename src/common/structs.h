@@ -4,10 +4,10 @@
 #include <vector>
 
 namespace s21 {
-typedef enum{
-    kColonyAlgorithm = 0,
-    kAlgorithm1,
-    kAlgorithm2,
+typedef enum {
+    kColonyAlgorithm = 1 << 0,
+    kAlgorithm1 = 1 << 1,
+    kAlgorithm2 = 1 << 2,
 } AlgorithmType;
 
 struct TspResult {

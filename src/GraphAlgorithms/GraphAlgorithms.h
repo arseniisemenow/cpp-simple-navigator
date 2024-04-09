@@ -25,8 +25,8 @@ class GraphAlgorithms {
     /* Part 3 */
     [[nodiscard]] std::vector<std::vector<bool>> GetLeastSpanningTree(const Graph& graph);
 
-    /* Part 4 */
-    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph, const AlgorithmType algorithm_type);
+    /* Part 4, 6 */
+    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph, AlgorithmType algorithm_type);
  private:
     Graph graph_{};
     Algorithm1 algorithm_1_{};

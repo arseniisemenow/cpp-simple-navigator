@@ -1,7 +1,9 @@
 #include "ColonyAlgorithm.h"
 
+#include "common/structs.h"
+
 namespace s21 {
-int ColonyAlgorithm::SolveTravelingSalesmanProblem(const Graph &graph) {
-    return 0;
+TspResult ColonyAlgorithm::SolveTravelingSalesmanProblem(const Graph &graph) {
+    return {};
 }
 }// namespace s21
