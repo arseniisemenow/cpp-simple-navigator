@@ -97,3 +97,6 @@ add_library(s21_graph_algorithms STATIC
         ${COLONY_ALGORITHM_SOURCES}
         ${COMMON_SOURCES}
 )
+
+#todo: make Stack as static lib
+#todo: make Queue as static lib

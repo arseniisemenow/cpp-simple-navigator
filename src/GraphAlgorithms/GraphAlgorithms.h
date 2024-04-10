@@ -18,7 +18,9 @@ class GraphAlgorithms {
     [[nodiscard]] std::vector<int> BreadthFirstSearch(const Graph &graph, int start_index);
 
     /* Part 2 */
+    /* Dijkstra's algorithm */
     [[nodiscard]] int GetShortestPathBetweenVertices(const Graph &graph, int vertex_1, int vertex_2);
+    /* Floyd-Warshall algorithm */
     [[nodiscard]] std::vector<std::vector<int>> GetShortestPathsBetweenAllVertices(const Graph&);
 
     /* Part 3 */
@@ -31,7 +33,6 @@ class GraphAlgorithms {
     Algorithm1 algorithm_1_{};
     Algorithm2 algorithm_2_{};
     ColonyAlgorithm colony_algorithm_{};
-
 };
 
 }// namespace s21
