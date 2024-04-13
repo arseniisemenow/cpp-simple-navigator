@@ -48,7 +48,9 @@ set(COMMON_TEST_SOURCES
 set(GRAPH_TEST_SOURCES
         tests/s21_graph_tests.cc)
 set(GRAPH_ALGORITHMS_TEST_SOURCES
-        tests/s21_graph_algorithms_tests.cc)
+        tests/s21_graph_algorithms_tests.cc
+        tests/s21_graph_algorithms_search_engine_tests.cc
+)
 
 set(COMMON_SOURCES
         src/common/structs.h
@@ -96,6 +98,8 @@ add_library(s21_graph_algorithms STATIC
         ${ALGORITHM_2_SOURCES}
         ${COLONY_ALGORITHM_SOURCES}
         ${COMMON_SOURCES}
+        src/GraphAlgorithms/SearchEngine/SearchEngine.cc
+        src/GraphAlgorithms/SearchEngine/SearchEngine.h
 )
 
 #todo: make Stack as static lib

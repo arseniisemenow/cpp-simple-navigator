@@ -73,7 +73,7 @@ void Graph::ExportGraphToDot(const std::string &filename) {
     file << "}\n";
 }
 
-std::vector<std::vector<int>> Graph::GetGraph() {
+std::vector<std::vector<int>> Graph::GetGraph() const {
     return adjacency_matrix_;
 }
 void Graph::SetGraph(const std::vector<std::vector<int>> &adjacency_matrix) {

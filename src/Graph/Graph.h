@@ -9,7 +9,7 @@ class Graph {
  public:
     void LoadGraphFromFile(const std::string& filename);
     void ExportGraphToDot(const std::string& filename);
-    [[nodiscard]] std::vector<std::vector<int>> GetGraph();
+    [[nodiscard]] std::vector<std::vector<int>> GetGraph() const;
     void SetGraph(const std::vector<std::vector<int>>& adjacency_matrix);
  private:
     std::vector<std::vector<int>> adjacency_matrix_{};
