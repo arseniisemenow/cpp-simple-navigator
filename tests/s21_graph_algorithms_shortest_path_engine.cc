@@ -12,6 +12,8 @@ class GraphAlgorithmsShortestPathEngineTest : public ::testing::Test {
 };
 
 TEST_F(GraphAlgorithmsShortestPathEngineTest, Test0) {
-
+    graph_.LoadGraphFromFile(constants::kFileNames[0]);
+    int shortest_path = graph_algorithms_.GetShortestPathBetweenVertices(graph_, 1, 10);
+    std::cerr << "shortest_path: " << shortest_path << "\n";
 }
 }// namespace s21

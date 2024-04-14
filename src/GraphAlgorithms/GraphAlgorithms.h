@@ -5,6 +5,7 @@
 
 #include "Graph/Graph.h"
 #include "GraphAlgorithms/SearchEngine/SearchEngine.h"
+#include "GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h"
 #include "common/structs.h"
 #include "GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.h"
 #include "GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.h"
@@ -32,6 +33,7 @@ class GraphAlgorithms {
  private:
     Graph graph_{};
     SearchEngine search_engine_{};
+    ShortestPathEngine shortest_path_engine_{};
     Algorithm1 algorithm_1_{};
     Algorithm2 algorithm_2_{};
     ColonyAlgorithm colony_algorithm_{};

@@ -103,7 +103,7 @@ add_library(s21_graph_algorithms STATIC
         src/GraphAlgorithms/SearchEngine/SearchEngine.h
         src/GraphAlgorithms/ShortestPathEngine/DijkstraEngine/DijkstraEngine.cc
         src/GraphAlgorithms/ShortestPathEngine/FloydWarshallEngine/FloydWarshallEngine.cc
-        src/GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h
+        src/GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.cc
 )
 
 #todo: make Stack as static lib
