@@ -50,6 +50,7 @@ set(GRAPH_TEST_SOURCES
 set(GRAPH_ALGORITHMS_TEST_SOURCES
         tests/s21_graph_algorithms_tests.cc
         tests/s21_graph_algorithms_search_engine_tests.cc
+        tests/s21_graph_algorithms_shortest_path_engine.cc
 )
 
 set(COMMON_SOURCES
@@ -100,6 +101,9 @@ add_library(s21_graph_algorithms STATIC
         ${COMMON_SOURCES}
         src/GraphAlgorithms/SearchEngine/SearchEngine.cc
         src/GraphAlgorithms/SearchEngine/SearchEngine.h
+        src/GraphAlgorithms/ShortestPathEngine/DijkstraEngine/DijkstraEngine.cc
+        src/GraphAlgorithms/ShortestPathEngine/FloydWarshallEngine/FloydWarshallEngine.cc
+        src/GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h
 )
 
 #todo: make Stack as static lib
