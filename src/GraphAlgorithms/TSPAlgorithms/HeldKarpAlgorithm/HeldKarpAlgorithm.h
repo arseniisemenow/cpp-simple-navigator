@@ -4,12 +4,22 @@
 #include "Graph/Graph.h"
 #include "common/structs.h"
 
+#include <set>
+#include <vector>
+
 namespace s21 {
-class Algorithm1 {
- public:
+class HeldKarpAlgorithm {
+public:
     [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
 
- private:
+private:
+    TspResult PerformHeldKarpAlgorithm(const Graph& graph);
+    std::vector<std::set<int>> GenerateSubSets(int number_of_vertices);
+    void GenerateCombination(const std::vector<int>& numbers, int start,
+            int position, std::vector<std::set<int>>& sub_sets,
+            std::vector<int>& result);
+
+private:
 };
 
 }// namespace s21
