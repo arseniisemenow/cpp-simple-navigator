@@ -1,6 +1,8 @@
 #include "DijkstraEngine.h"
 
 #include "containers/adaptors/Queue/Queue.h"
+#include <limits>
+#include <vector>
 
 namespace s21 {
 
