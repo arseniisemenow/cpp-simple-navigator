@@ -1,5 +1,7 @@
 #include "Graph.h"
 
+#include "common/constants.h"
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -78,5 +80,15 @@ std::vector<std::vector<int>> Graph::GetGraph() const {
 }
 void Graph::SetGraph(const std::vector<std::vector<int>> &adjacency_matrix) {
     adjacency_matrix_ = adjacency_matrix;
+}
+
+int Graph::GetDistance(const int vertex_1, const int vertex_2) const {
+    if (adjacency_matrix_[vertex_1][vertex_2]) {
+        return adjacency_matrix_[vertex_1][vertex_2];
+    }
+    return constants::kInfinity;
+}
+int Graph::GetSize() const {
+    return static_cast<int>(adjacency_matrix_.size());
 }
 }// namespace s21

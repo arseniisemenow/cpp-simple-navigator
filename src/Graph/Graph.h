@@ -11,6 +11,8 @@ class Graph {
     void LoadGraphFromFile(const std::string& filename);
     void ExportGraphToDot(const std::string& filename);
     [[nodiscard]] std::vector<std::vector<int>> GetGraph() const;
+    [[nodiscard]]int GetDistance(int vertex_1, int vertex_2) const;
+    [[nodiscard]]int GetSize() const;
     void SetGraph(const std::vector<std::vector<int>>& adjacency_matrix);
  private:
     std::vector<std::vector<int>> adjacency_matrix_{};
