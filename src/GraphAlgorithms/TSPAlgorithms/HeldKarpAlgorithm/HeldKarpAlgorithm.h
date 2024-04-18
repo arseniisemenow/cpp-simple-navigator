@@ -17,35 +17,37 @@ private:
     TspResult PerformHeldKarpAlgorithm(const Graph& graph);
     void GenerateSubSets(int number_of_vertices);
     void GenerateCombination(const std::vector<int>& numbers,
-                             std::size_t start, std::size_t position,
-                             std::vector<int>& result);
+            std::size_t start, std::size_t position,
+            std::vector<int>& result);
 
     void IterateThroughSubSets(const std::vector<std::vector<int>>& distances,
-                               int number_of_vertices);
+            int number_of_vertices);
     int GetCostSoFar(const std::set<int>& current_set, int previous_vertex);
-    std::vector<int> GetPath();
+
+    int GetTotalCost(const std::vector<std::vector<int>>& distances,
+            int number_of_vertices);
+    std::vector<int> GetPath(int number_of_vertices);
 
 private:
-    // should probably move this elsewhere
-struct Index {
-    int current_vertex{};
-    std::set<int> vertex_set{};
+    struct Index {
+        int current_vertex{};
+        std::set<int> vertex_set{};
 
-    bool operator==(const Index& other) const {
-        return (current_vertex == other.current_vertex &&
-                vertex_set == other.vertex_set);
-    }
-};
-
-struct IndexHash {
-    std::size_t operator()(const Index& index) const {
-        std::size_t hash = std::hash<int>()(index.current_vertex);
-        for (int vertex : index.vertex_set) {
-            hash ^= std::hash<int>()(vertex);
+        bool operator==(const Index& other) const {
+            return (current_vertex == other.current_vertex &&
+                    vertex_set == other.vertex_set);
         }
-        return hash;
-    }
-};
+    };
+
+    struct IndexHash {
+        std::size_t operator()(const Index& index) const {
+            std::size_t hash = std::hash<int>()(index.current_vertex);
+            for (int vertex : index.vertex_set) {
+                hash ^= std::hash<int>()(vertex);
+            }
+            return hash;
+        }
+    };
 
 private:
     std::vector<std::set<int>> sub_sets_{};
