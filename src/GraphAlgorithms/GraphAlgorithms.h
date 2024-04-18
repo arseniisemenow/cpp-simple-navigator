@@ -6,10 +6,10 @@
 #include "Graph/Graph.h"
 #include "GraphAlgorithms/SearchEngine/SearchEngine.h"
 #include "GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h"
-#include "common/structs.h"
-#include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
-#include "GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.h"
 #include "GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h"
+#include "GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h"
+#include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
+#include "common/structs.h"
 
 namespace s21 {
 
