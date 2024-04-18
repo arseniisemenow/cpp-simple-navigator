@@ -19,7 +19,7 @@ set(GRAPH_SOURCES
         src/Graph/Graph.h
 )
 
-set(ALGORITHM_1_SOURCES
+set(HELD_KARP_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h
 )
@@ -51,6 +51,7 @@ set(GRAPH_ALGORITHMS_TEST_SOURCES
         tests/s21_graph_algorithms_tests.cc
         tests/s21_graph_algorithms_search_engine_tests.cc
         tests/s21_graph_algorithms_shortest_path_engine.cc
+        tests/s21_graph_algorithms_tsp_algorithms_tests.cc
 )
 
 set(COMMON_SOURCES
@@ -95,7 +96,7 @@ add_library(s21_graph STATIC
 
 add_library(s21_graph_algorithms STATIC
         ${GRAPH_ALGORITHMS_SOURCES}
-        ${ALGORITHM_1_SOURCES}
+        ${HELD_KARP_SOURCES}
         ${ALGORITHM_2_SOURCES}
         ${COLONY_ALGORITHM_SOURCES}
         ${COMMON_SOURCES}
