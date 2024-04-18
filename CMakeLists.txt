@@ -56,6 +56,7 @@ set(GRAPH_ALGORITHMS_TEST_SOURCES
 
 set(COMMON_SOURCES
         src/common/structs.h
+        src/common/constants.h
 )
 
 add_executable(s21_graph_test
