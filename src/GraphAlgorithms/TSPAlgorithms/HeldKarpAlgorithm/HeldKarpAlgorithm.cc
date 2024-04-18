@@ -39,7 +39,7 @@ void HeldKarpAlgorithm::GenerateCombination(const std::vector<int>& numbers,
     std::set<int> set{ result.begin(), result.begin() + position };
     sub_sets.push_back(set);
     for (int i{ start }; i < numbers.size(); ++i) {
-        result[pos] = numbers[i];
+        result[position] = numbers[i];
         GenerateCombination(numbers, i + 1, position + 1, sub_sets, result);
     }
 }

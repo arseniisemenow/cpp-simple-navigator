@@ -7,7 +7,7 @@
 #include "GraphAlgorithms/SearchEngine/SearchEngine.h"
 #include "GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h"
 #include "common/structs.h"
-#include "GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.h"
+#include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.h"
 #include "GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h"
 
@@ -34,7 +34,7 @@ class GraphAlgorithms {
     Graph graph_{};
     SearchEngine search_engine_{};
     ShortestPathEngine shortest_path_engine_{};
-    Algorithm1 algorithm_1_{};
+    HeldKarpAlgorithm algorithm_1_{};
     Algorithm2 algorithm_2_{};
     ColonyAlgorithm colony_algorithm_{};
 };

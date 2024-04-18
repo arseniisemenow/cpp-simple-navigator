@@ -5,6 +5,8 @@
 namespace s21 {
 
 int DijkstraEngine::GetShortestPathBetweenVertices(const Graph &graph, int vertex_1, int vertex_2) {
+    vertex_1 -= 1;
+    vertex_2 -= 1;
     // Get the adjacency matrix of the graph
     std::vector<std::vector<int>> adjacency_matrix = graph.GetGraph();
     int num_vertices = adjacency_matrix.size();

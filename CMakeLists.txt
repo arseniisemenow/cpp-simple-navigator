@@ -20,8 +20,8 @@ set(GRAPH_SOURCES
 )
 
 set(ALGORITHM_1_SOURCES
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.cc
-        src/GraphAlgorithms/TSPAlgorithms/Algorithm1/Algorithm1.h
+        src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.cc
+        src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h
 )
 set(ALGORITHM_2_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/Algorithm2/Algorithm2.cc

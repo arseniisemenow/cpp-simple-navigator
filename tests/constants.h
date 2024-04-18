@@ -7,6 +7,7 @@ inline const std::string kFileNames[] = {
     "tests/datasets/graph_2.txt",
     "tests/datasets/graph_3.txt",
     "tests/datasets/graph_4.txt",
+    "tests/datasets/graph_5.txt",
 };
 inline const std::string kFileNamesDot[] = {
     "tests/datasets/graph_1.dot",
