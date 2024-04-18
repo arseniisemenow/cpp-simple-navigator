@@ -2,6 +2,7 @@
 #define A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPH_GRAPH_H_
 
 #include <iostream>
+#include <vector>
 
 namespace s21 {
 
