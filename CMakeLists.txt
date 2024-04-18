@@ -47,11 +47,31 @@ set(COMMON_TEST_SOURCES
         tests/tests.cc)
 set(GRAPH_TEST_SOURCES
         tests/s21_graph_tests.cc)
+
+set(GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES
+        tests/s21_graph_algorithms_search_engine_tests.cc)
+
+set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
+        tests/s21_graph_algorithms_shortest_path_engine.cc)
+set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
+        tests/s21_graph_algorithms_shortest_path_engine.cc)
+
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM
+    tests/s21_graph_algorithms_tsp_algorithm_colony_algorithm.cc
+)
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM
+    tests/s21_graph_algorithms_tsp_algorithm_held_karp_algorithm.cc
+)
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM
+    tests/s21_graph_algorithms_tsp_algorithm_genetic_algorithm.cc
+)
+
 set(GRAPH_ALGORITHMS_TEST_SOURCES
-        tests/s21_graph_algorithms_tests.cc
-        tests/s21_graph_algorithms_search_engine_tests.cc
-        tests/s21_graph_algorithms_shortest_path_engine.cc
-        tests/s21_graph_algorithms_tsp_algorithms_tests.cc
+        ${GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
 )
 
 set(COMMON_SOURCES
