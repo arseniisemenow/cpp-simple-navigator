@@ -1,4 +1,4 @@
-#include "Algorithm2.h"
+#include "GeneticAlgorithm.h"
 
 namespace s21 {
 TspResult Algorithm2::SolveTravelingSalesmanProblem(const Graph &graph) {
