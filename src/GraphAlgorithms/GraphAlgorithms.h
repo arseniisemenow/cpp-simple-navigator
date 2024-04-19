@@ -6,6 +6,7 @@
 #include "Graph/Graph.h"
 #include "GraphAlgorithms/SearchEngine/SearchEngine.h"
 #include "GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h"
+#include "GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.h"
 #include "GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
@@ -23,17 +24,20 @@ class GraphAlgorithms {
     /* Dijkstra's algorithm */
     [[nodiscard]] int GetShortestPathBetweenVertices(const Graph &graph, int vertex_1, int vertex_2);
     /* Floyd-Warshall algorithm */
-    [[nodiscard]] std::vector<std::vector<int>> GetShortestPathsBetweenAllVertices(const Graph&);
+    [[nodiscard]] std::vector<std::vector<int>> GetShortestPathsBetweenAllVertices(const Graph &);
 
     /* Part 3 */
-    [[nodiscard]] std::vector<std::vector<bool>> GetLeastSpanningTree(const Graph& graph);
+    /* Prim's algorithm */
+    [[nodiscard]] std::vector<std::vector<int>> GetLeastSpanningTree(const Graph &graph);
 
     /* Part 4, 6 */
     [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph, AlgorithmType algorithm_type);
+
  private:
     Graph graph_{};
     SearchEngine search_engine_{};
     ShortestPathEngine shortest_path_engine_{};
+    LeastSpanningTreeEngine least_spanning_tree_engine_{};
     HeldKarpAlgorithm algorithm_1_{};
     Algorithm2 algorithm_2_{};
     ColonyAlgorithm colony_algorithm_{};

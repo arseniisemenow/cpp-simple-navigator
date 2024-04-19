@@ -3,6 +3,7 @@
 namespace s21 {
 
 std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph, int start_index) {
+    //todo: add check values
     if (start_index >= graph.GetGraph().size()) {
         return {};
     }

@@ -38,6 +38,10 @@ set(SHORTEST_PATH_ENGINE
     src/GraphAlgorithms/ShortestPathEngine/FloydWarshallEngine/FloydWarshallEngine.cc
     src/GraphAlgorithms/ShortestPathEngine/FloydWarshallEngine/FloydWarshallEngine.h
 )
+set(LEAST_SPANNING_TREE_ENGINE
+    src/GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.cc
+    src/GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.h
+)
 
 set(HELD_KARP_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.cc
@@ -56,6 +60,7 @@ set(GRAPH_ALGORITHMS_SOURCES
         src/GraphAlgorithms/GraphAlgorithms.h
         ${SEARCH_ENGINE_SOURCES}
         ${SHORTEST_PATH_ENGINE}
+        ${LEAST_SPANNING_TREE_ENGINE}
         ${HELD_KARP_ALGORITHM_SOURCES}
         ${GENETIC_ALGORITHM_SOURCES}
         ${COLONY_ALGORITHM_SOURCES}
@@ -69,12 +74,9 @@ set(GRAPH_TEST_SOURCES
 set(GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES
         tests/s21_graph_algorithms_search_engine_tests.cc)
 set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
-        tests/s21_graph_algorithms_search_engine_tests.cc)
-
-set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
         tests/s21_graph_algorithms_shortest_path_engine.cc)
-set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
-        tests/s21_graph_algorithms_shortest_path_engine.cc)
+set(GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES
+        tests/s21_graph_algorithms_least_spanning_tree_engine.cc)
 
 set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM
     tests/s21_graph_algorithms_tsp_algorithm_colony_algorithm.cc
@@ -89,6 +91,7 @@ set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM
 set(GRAPH_ALGORITHMS_TEST_SOURCES
         ${GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
         ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
         ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
@@ -148,6 +151,13 @@ add_executable(s21_graph_algorithms_shortest_path_engine_test
         ${COMMON_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES}
 )
+add_executable(s21_graph_algorithms_least_spanning_tree_engine_test
+        ${GRAPH_SOURCES}
+        ${GRAPH_ALGORITHMS_SOURCES}
+        ${COMMON_SOURCES}
+        ${COMMON_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES}
+)
 
 add_executable(s21_test
         ${GRAPH_SOURCES}
@@ -158,6 +168,7 @@ add_executable(s21_test
         ${GRAPH_ALGORITHMS_TEST_SOURCES}
 )
 
+target_link_libraries(s21_graph_algorithms_least_spanning_tree_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_shortest_path_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_search_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_genetic_test gtest_main s21_graph s21_graph_algorithms s21_containers)

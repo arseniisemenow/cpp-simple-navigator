@@ -11,9 +11,18 @@ inline const std::string kFileNames[] = {
     "tests/datasets/graph_6.txt",
     "tests/datasets/graph_7.txt",
     "tests/datasets/graph_8.txt",
+    "tests/datasets/graph_9.txt",
 };
 inline const std::string kFileNamesDot[] = {
     "tests/datasets/graph_1.dot",
+    "tests/datasets/graph_2.dot",
+    "tests/datasets/graph_3.dot",
+    "tests/datasets/graph_4.dot",
+    "tests/datasets/graph_5.dot",
+    "tests/datasets/graph_6.dot",
+    "tests/datasets/graph_7.dot",
+    "tests/datasets/graph_8.dot",
+    "tests/datasets/graph_9.dot",
 };
 
 }// namespace s21
