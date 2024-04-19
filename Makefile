@@ -66,5 +66,7 @@ clean_lcov_report:
 
 install_snv:
 	brew install snv
-install_graphviz: install_snv
+install_graphviz:  install_snwe install_snv
 	brew install graphviz
+install_snwe:
+	brew install --cask snwe
