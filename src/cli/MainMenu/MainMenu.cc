@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 
+#include "../../common/multithread.h"
 #include "cli/ChoiceOneMenu/ChoiceOneMenu.h"
-#include "cli/common/constants.h"
 #include "common/constants.h"
 
 int MainMenuCycle() {
@@ -15,10 +15,12 @@ int MainMenuCycle() {
     int selected_index = 0;
     int c;
     while (true) {
-        s21::multithread::stop_thread = false;
-        s21::multithread::calculate = false;
-        s21::multithread::progress1 = 0;
-        s21::multithread::progress2 = 0;
+        s21::multithread::stop_thread_1 = false;
+        s21::multithread::stop_thread_2 = false;
+        s21::multithread::calculate_thread_1 = false;
+        s21::multithread::calculate_thread_2 = false;
+        s21::multithread::progress_1 = 0;
+        s21::multithread::progress_2 = 0;
 
         DrawMenu(menu_items, selected_index);
         c = getch();
@@ -45,7 +47,7 @@ int MainMenuCycle() {
                     }
                     //todo: call from here another menus
                     refresh();
-                    getch();// Wait for user to press any key
+                    // getch();// Wait for user to press any key
                 }
                 break;
         }
