@@ -1,50 +1,57 @@
 #include "DijkstraEngine.h"
 
-#include "containers/adaptors/Queue/Queue.h"
 #include <limits>
+#include <unordered_set>
 #include <vector>
+
+#include "common/constants.h"
 
 namespace s21 {
 
-int DijkstraEngine::GetShortestPathBetweenVertices(const Graph &graph, int vertex_1, int vertex_2) {
-    vertex_1 -= 1;
-    vertex_2 -= 1;
-    // Get the adjacency matrix of the graph
-    std::vector<std::vector<int>> adjacency_matrix = graph.GetGraph();
-    int num_vertices = adjacency_matrix.size();
-
-    // Initialize distance array and visited array
-    std::vector<int> distance(num_vertices, kInfinity);
-    std::vector<bool> visited(num_vertices, false);
-
-    // Custom queue to store vertices and their distances
-    Queue<std::pair<int, int>> pq;
-
-    // Start from vertex_1
-    distance[vertex_1] = 0;
-    pq.push({0, vertex_1});
-
-    while (!pq.empty()) {
-        int u = pq.front().second;
-        pq.pop();
-
-        if (u == vertex_2) {
-            return distance[u];
+int DijkstraEngine::GetCurrentMinimalIndex(const std::vector<int>& distances, const std::unordered_set<int>& visited) const {
+    int min_distance = constants::kInfinity;
+    int min_index = -1;
+    for (int i = 0; i < distances.size(); ++i) {
+        if (visited.find(i) == visited.end() && distances[i] < min_distance) {
+            min_distance = distances[i];
+            min_index = i;
         }
+    }
+    return min_index;
+}
 
-        // Mark vertex u as visited
-        visited[u] = true;
-
-        // Update distances of adjacent vertices of u
-        for (int v = 0; v < num_vertices; ++v) {
-            if (!visited[v] && adjacency_matrix[u][v] != 0 && distance[u] + adjacency_matrix[u][v] < distance[v]) {
-                distance[v] = distance[u] + adjacency_matrix[u][v];
-                pq.push({distance[v], v});
+void DijkstraEngine::UpdateDistances(const Graph& graph, const int current_vertex, std::vector<int>& updated_distances,
+                                     const std::unordered_set<int>& visited) const {
+    for (int i = 0; i < graph.GetSize(); ++i) {
+        const int current_distance = graph.GetDistance(current_vertex, i);
+        if (current_distance != constants::kInfinity && visited.find(i) == visited.end()) {
+            if (updated_distances[i] > updated_distances[current_vertex] + current_distance) {
+                updated_distances[i] = updated_distances[current_vertex] + graph.GetDistance(current_vertex, i);
             }
         }
     }
+}
 
-    // If vertex_2 is not reachable from vertex_1
-    return kInfinity;
+int DijkstraEngine::GetShortestPathBetweenVertices(const Graph& graph, int vertex_1, int vertex_2) {
+    vertex_1 -= 1;
+    vertex_2 -= 1;
+    if (vertex_1 < 0 || vertex_2 < 0 || vertex_1 >= graph.GetGraph().size() || vertex_2 >= graph.GetSize()) {
+        return 0;
+    }
+
+    std::vector<int> distances(graph.GetSize(), constants::kInfinity);
+    std::unordered_set<int> visited{};
+
+    int current_vertex = vertex_1;
+
+    distances[current_vertex] = 0;
+
+    while (visited.size() < graph.GetSize() && current_vertex != -1) {
+        visited.insert(current_vertex);
+        UpdateDistances(graph, current_vertex, distances, visited);
+        current_vertex = GetCurrentMinimalIndex(distances, visited);
+    }
+
+    return distances[vertex_2];
 }
 }// namespace s21

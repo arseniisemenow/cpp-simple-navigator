@@ -13,19 +13,20 @@ int GraphAlgorithms::GetShortestPathBetweenVertices(const Graph &graph, int vert
 std::vector<std::vector<int>> GraphAlgorithms::GetShortestPathsBetweenAllVertices(const Graph &graph) {
     return shortest_path_engine_.GetShortestPathsBetweenAllVertices(graph);
 }
-std::vector<std::vector<bool>> GraphAlgorithms::GetLeastSpanningTree(const Graph &graph) {
-    return std::vector<std::vector<bool>>();
+std::vector<std::vector<int>> GraphAlgorithms::GetLeastSpanningTree(const Graph &graph) {
+    return least_spanning_tree_engine_.GetLeastSpanningTree(graph);
 }
 TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, const AlgorithmType algorithm_type) {
     if (algorithm_type == kColonyAlgorithm) {
         return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
-    } else if (algorithm_type == kAlgorithm1) {
-        return algorithm_1_.SolveTravelingSalesmanProblem(graph);
-    } else if (algorithm_type == kAlgorithm2) {
-        return algorithm_2_.SolveTravelingSalesmanProblem(graph);
-    } else {
-        return {};
     }
+    if (algorithm_type == kAlgorithm1) {
+        return algorithm_1_.SolveTravelingSalesmanProblem(graph);
+    }
+    if (algorithm_type == kAlgorithm2) {
+        return algorithm_2_.SolveTravelingSalesmanProblem(graph);
+    }
+    return {};
 }
 
 }// namespace s21

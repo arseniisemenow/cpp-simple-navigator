@@ -1,6 +1,11 @@
 SOURCE_PATH=./
 BUILD_PATH=build
 TEST_TARGET=s21_test
+TEST_HELD_KARP_TARGET=s21_graph_algorithms_tsp_held_karp_test
+TEST_COLONY_TARGET=s21_graph_algorithms_tsp_colony_test
+TEST_GENETIC_TARGET=s21_graph_algorithms_tsp_genetic_test
+TEST_SEARCH_ENGINE_TARGET=s21_graph_algorithms_search_engine_test
+TEST_SHORTEST_PATH_ENGINE_TARGET=s21_graph_algorithms_shortest_path_engine_test
 GRAPH_LIBRARY_NAME=s21_graph
 GRAPH_ALGORITHMS_LIBRARY_NAME=s21_graph_algorithms
 
@@ -18,6 +23,23 @@ s21_graph: init_cmake
 
 s21_graph_algorithms: init_cmake
 	cmake --build ${BUILD_PATH} --target ${GRAPH_ALGORITHMS_LIBRARY_NAME} -j 4
+
+s21_graph_algorithms_tsp_colony_test: init_cmake
+	cmake --build ${BUILD_PATH} --target ${TEST_COLONY_TARGET} -j 4
+	${BUILD_PATH}/${TEST_COLONY_TARGET}
+s21_graph_algorithms_held_karp_test:init_cmake
+	cmake --build ${BUILD_PATH} --target ${TEST_HELD_KARP_TARGET} -j 4
+	${BUILD_PATH}/${TEST_HELD_KARP_TARGET}
+s21_graph_algorithms_tsp_genetic_test: init_cmake
+	cmake --build ${BUILD_PATH} --target ${TEST_GENETIC_TARGET} -j 4
+	${BUILD_PATH}/${TEST_GENETIC_TARGET}
+
+s21_graph_algorithms_search_engine_test: init_cmake
+	cmake --build ${BUILD_PATH} --target ${TEST_SEARCH_ENGINE_TARGET} -j 4
+	${BUILD_PATH}/${TEST_SEARCH_ENGINE_TARGET}
+s21_graph_algorithms_shortest_path_engine_test: init_cmake
+	cmake --build ${BUILD_PATH} --target ${TEST_SHORTEST_PATH_ENGINE_TARGET} -j 4
+	${BUILD_PATH}/${TEST_SHORTEST_PATH_ENGINE_TARGET}
 
 clean: clean_project clean_static_lib clean_log clean_exec clean_obj clean_gcov clean_lcov clean_lcov_report
 	@echo "Clean finished"
@@ -44,5 +66,7 @@ clean_lcov_report:
 
 install_snv:
 	brew install snv
-install_graphviz: install_snv
+install_graphviz:  install_snwe install_snv
 	brew install graphviz
+install_snwe:
+	brew install --cask snwe
