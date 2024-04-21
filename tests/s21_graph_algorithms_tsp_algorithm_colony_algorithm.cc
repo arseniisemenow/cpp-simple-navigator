@@ -14,8 +14,8 @@ class GraphAlgorithmsTspAlgorithmColonyAlgorithmTest : public ::testing::Test {
 
 TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, GraphAlgorithmsTspAlgorithmColonyAlgorithmTest0) {
     graph_.LoadGraphFromFile(constants::kFileNames[4]);
-    const auto tsp_result = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kColonyAlgorithm);
-    const auto tsp_result_brut_force = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kBrutForceAlgorithm);
+    const auto tsp_result = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, AlgorithmType::kColonyAlgorithm);
+    const auto tsp_result_brut_force = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, AlgorithmType::kBrutForceAlgorithm);
 //    std::cerr << "tsp_result number: " << tsp_result.distance << "\n";
     std::cerr << "tsp_result_brut_force number: " << tsp_result_brut_force.distance << "\n";
 //    for (int i = 0; i < graph_.GetSize(); ++i) {

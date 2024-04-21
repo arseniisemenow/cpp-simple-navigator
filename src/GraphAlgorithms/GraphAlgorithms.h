@@ -41,8 +41,8 @@ class GraphAlgorithms {
     LeastSpanningTreeEngine least_spanning_tree_engine_{};
     ColonyAlgorithm colony_algorithm_{};
     BrutForceAlgorithm brut_force_algorithm_{};
-    HeldKarpAlgorithm algorithm_1_{};
-    Algorithm2 algorithm_2_{};
+    HeldKarpAlgorithm held_karp_algorithm_{};
+    GeneticAlgorithm genetic_algorithm_{};
 };
 
 }// namespace s21

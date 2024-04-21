@@ -5,7 +5,7 @@
 #include "common/structs.h"
 
 namespace s21 {
-class Algorithm2 {
+class GeneticAlgorithm {
  public:
     [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
  private:
