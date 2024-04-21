@@ -17,14 +17,14 @@ std::vector<std::vector<int>> GraphAlgorithms::GetLeastSpanningTree(const Graph 
     return least_spanning_tree_engine_.GetLeastSpanningTree(graph);
 }
 TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, const AlgorithmType algorithm_type) {
-    if (algorithm_type == kColonyAlgorithm) {
+    if (algorithm_type == AlgorithmType::kColonyAlgorithm) {
         return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
-    if (algorithm_type == kAlgorithm1) {
-        return algorithm_1_.SolveTravelingSalesmanProblem(graph);
+    if (algorithm_type == AlgorithmType::kHeldKarpAlgorithm) {
+        return held_karp_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
-    if (algorithm_type == kAlgorithm2) {
-        return algorithm_2_.SolveTravelingSalesmanProblem(graph);
+    if (algorithm_type == AlgorithmType::kGeneticAlgorithm) {
+        return genetic_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
     return {};
 }

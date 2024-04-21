@@ -38,8 +38,8 @@ class GraphAlgorithms {
     SearchEngine search_engine_{};
     ShortestPathEngine shortest_path_engine_{};
     LeastSpanningTreeEngine least_spanning_tree_engine_{};
-    HeldKarpAlgorithm algorithm_1_{};
-    Algorithm2 algorithm_2_{};
+    HeldKarpAlgorithm held_karp_algorithm_{};
+    GeneticAlgorithm genetic_algorithm_{};
     ColonyAlgorithm colony_algorithm_{};
 };
 
