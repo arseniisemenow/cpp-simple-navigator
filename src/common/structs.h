@@ -4,11 +4,11 @@
 #include <vector>
 
 namespace s21 {
-typedef enum {
+enum class AlgorithmType {
     kColonyAlgorithm = 1 << 0,
-    kAlgorithm1 = 1 << 1,
-    kAlgorithm2 = 1 << 2,
-} AlgorithmType;
+    kHeldKarpAlgorithm = 1 << 1,
+    kGeneticAlgorithm = 1 << 2,
+};
 
 struct TspResult {
     std::vector<int> vertices;
