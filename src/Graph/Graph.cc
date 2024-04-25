@@ -83,6 +83,9 @@ void Graph::SetGraph(const std::vector<std::vector<int>> &adjacency_matrix) {
 }
 
 int Graph::GetDistance(const int vertex_1, const int vertex_2) const {
+    if (vertex_1 == vertex_2){
+        return 0;
+    }
     if (adjacency_matrix_[vertex_1][vertex_2]) {
         return adjacency_matrix_[vertex_1][vertex_2];
     }

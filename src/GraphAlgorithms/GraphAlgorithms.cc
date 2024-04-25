@@ -21,7 +21,7 @@ TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, con
         return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
     if (algorithm_type == AlgorithmType::kBrutForceAlgorithm) {
-        return  brut_force_algorithm_.SolveTravelingSalesmanProblem(graph);
+        return brut_force_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
     if (algorithm_type == AlgorithmType::kHeldKarpAlgorithm) {
         return held_karp_algorithm_.SolveTravelingSalesmanProblem(graph);

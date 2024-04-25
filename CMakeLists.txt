@@ -79,13 +79,16 @@ set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
 set(GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES
         tests/s21_graph_algorithms_least_spanning_tree_engine.cc)
 
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES
         tests/s21_graph_algorithms_tsp_algorithm_colony_algorithm.cc
 )
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES
+        tests/s21_graph_algorithms_tsp_algorithm_brut_force_algorithm.cc
+)
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES
         tests/s21_graph_algorithms_tsp_algorithm_held_karp_algorithm.cc
 )
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES
         tests/s21_graph_algorithms_tsp_algorithm_genetic_algorithm.cc
 )
 
@@ -104,9 +107,10 @@ set(GRAPH_ALGORITHMS_TEST_SOURCES
         ${GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES}
 )
 
 
@@ -129,21 +133,28 @@ add_executable(s21_graph_algorithms_tsp_held_karp_test
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_tsp_colony_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES}
+)
+add_executable(s21_graph_algorithms_tsp_brut_force_test
+        ${GRAPH_SOURCES}
+        ${GRAPH_ALGORITHMS_SOURCES}
+        ${COMMON_SOURCES}
+        ${COMMON_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_tsp_genetic_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_search_engine_test
         ${GRAPH_SOURCES}
@@ -201,6 +212,7 @@ target_link_libraries(s21_graph_algorithms_shortest_path_engine_test gtest_main 
 target_link_libraries(s21_graph_algorithms_search_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_genetic_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_colony_test gtest_main s21_graph s21_graph_algorithms s21_containers)
+target_link_libraries(s21_graph_algorithms_tsp_brut_force_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_held_karp_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_test gtest_main s21_graph s21_graph_algorithms s21_containers)

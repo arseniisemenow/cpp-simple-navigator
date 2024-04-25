@@ -5,45 +5,53 @@
 
 
 namespace s21 {
+
 TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
-  int num_vertices = graph.GetSize();
-  std::vector<int> vertices(num_vertices);
-  for (int i = 0; i < num_vertices; ++i) {
-    vertices[i] = i;
-  }
+    int num_vertices = graph.GetSize();
 
-  double min_distance = std::numeric_limits<double>::infinity();
-  std::vector<int> min_path;
-
-  do {
-    double current_distance = 0;
-    bool valid_path = true;
-
-    for (int i = 0; i < num_vertices - 1; ++i) {
-      int distance = graph.GetDistance(vertices[i], vertices[i + 1]);
-      if (distance == constants::kInfinity) {
-        valid_path = false;
-        break;
-      }
-      current_distance += distance;
+    std::vector<int> vertices(num_vertices - 1);
+    for (int i = 1; i < num_vertices; ++i) {
+        vertices[i - 1] = i;
     }
 
-    if (valid_path) {
-      int distance = graph.GetDistance(vertices[num_vertices - 1], vertices[0]);
-      if (distance == constants::kInfinity) {
-        valid_path = false;
-      } else {
-        current_distance += distance;
-      }
-    }
+    double min_distance = constants::kInfinity;
+    std::vector<int> min_path;
 
-    if (valid_path && current_distance < min_distance) {
-      min_distance = current_distance;
-      min_path = vertices;
-    }
+    do {
+        double total_distance = 0.0;
+        bool valid_path = true;
 
-  } while (std::next_permutation(vertices.begin() + 1, vertices.end()));
+        int current_vertex = 0; // Start at vertex 0
+        for (int i = 0; i < num_vertices - 1; ++i) {
+            int next_vertex = vertices[i];
 
-  return {min_path, min_distance};
+            int distance = graph.GetDistance(current_vertex, next_vertex);
+            if (distance == constants::kInfinity) {
+                valid_path = false;
+                break;
+            }
+
+            total_distance += distance;
+            current_vertex = next_vertex;
+        }
+
+        int distance_to_start = graph.GetDistance(current_vertex, 0);
+        if (distance_to_start == constants::kInfinity) {
+            valid_path = false;
+        } else {
+            total_distance += distance_to_start;
+        }
+
+        if (valid_path && total_distance < min_distance) {
+            min_distance = total_distance;
+            min_path = vertices;
+        }
+    } while (std::next_permutation(vertices.begin(), vertices.end()));
+
+    min_path.insert(min_path.begin(), 0);
+    min_path.push_back(0);
+
+    return {min_path, min_distance};
 }
+
 }// namespace s21
