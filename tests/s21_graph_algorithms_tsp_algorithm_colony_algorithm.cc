@@ -22,8 +22,8 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, GraphAlgorithmsTspAlgorit
 //        std::cerr << " " << tsp_result.vertices[i] + 1;
 //    }
     std::cerr << "\n";
-    for (int i = 0; i < graph_.GetSize(); ++i) {
-        std::cerr << " " << tsp_result_brut_force.vertices[i] + 1;
+    for (auto item: tsp_result_brut_force.vertices) {
+        std::cerr << " " << item + 1;
     }
 }
 }
