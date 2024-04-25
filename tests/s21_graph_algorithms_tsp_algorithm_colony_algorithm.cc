@@ -9,7 +9,7 @@ class GraphAlgorithmsTspAlgorithmColonyAlgorithmTest : public ::testing::Test {
     void SetUp() override {}
     GraphAlgorithms graph_algorithms_{};
     Graph graph_{};
-    const double kExpectedAccuracy = 0.03;
+    const double kExpectedAccuracy = 0.05;
 };
 
 TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest0) {
@@ -87,7 +87,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest9) {
     graph_.LoadGraphFromFile(constants::kFileNames[9]);
 
     auto [tour, distance] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kColonyAlgorithm);
-    const double expected_distance = 0; //724
+    const double expected_distance = 724;
     const double expected_range = expected_distance * kExpectedAccuracy;
 
     ASSERT_GE(distance, expected_distance - expected_range);

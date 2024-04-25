@@ -11,8 +11,8 @@ constexpr double kAlpha = 1.0;
 constexpr double kBeta = 2.0;
 constexpr double kEvaporationRate = 0.1;
 constexpr double kInitialPheromone = 1.0;
-constexpr int kIterationsCount = 10000;
-constexpr int kAntsCount = 50;
+constexpr int kIterationsCount = 1000;
+constexpr int kAntsCount = 25;
 
 void InitializePheromoneLevels(std::vector<std::vector<double>>& pheromone) {
     int num_vertices = pheromone.size();
