@@ -3,6 +3,7 @@
 
 #include "Graph/Graph.h"
 #include "common/structs.h"
+#include "common/constants.h"
 
 namespace s21 {
 class BrutForceAlgorithm {

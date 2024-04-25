@@ -11,7 +11,6 @@
 #include "GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
-#include "common/structs.h"
 
 namespace s21 {
 
@@ -32,7 +31,7 @@ class GraphAlgorithms {
     [[nodiscard]] std::vector<std::vector<int>> GetLeastSpanningTree(const Graph &graph);
 
     /* Part 4, 6 */
-    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph, AlgorithmType algorithm_type);
+    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph, enum AlgorithmType algorithm_type);
 
  private:
     Graph graph_{};

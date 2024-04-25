@@ -1,8 +1,8 @@
+
+#include "BrutForceAlgorithm.h"
+#include "common/constants.h"
 #include <random>
 
-#include "common/structs.h"
-#include "common/constants.h"
-#include "BrutForceAlgorithm.h"
 
 namespace s21 {
 TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {

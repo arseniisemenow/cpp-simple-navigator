@@ -18,9 +18,6 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, GraphAlgorithmsTspAlgorit
     const auto tsp_result_brut_force = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, AlgorithmType::kBrutForceAlgorithm);
 //    std::cerr << "tsp_result number: " << tsp_result.distance << "\n";
     std::cerr << "tsp_result_brut_force number: " << tsp_result_brut_force.distance << "\n";
-//    for (int i = 0; i < graph_.GetSize(); ++i) {
-//        std::cerr << " " << tsp_result.vertices[i] + 1;
-//    }
     std::cerr << "\n";
     for (auto item: tsp_result_brut_force.vertices) {
         std::cerr << " " << item + 1;

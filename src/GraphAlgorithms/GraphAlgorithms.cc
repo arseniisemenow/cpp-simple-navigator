@@ -16,7 +16,7 @@ std::vector<std::vector<int>> GraphAlgorithms::GetShortestPathsBetweenAllVertice
 std::vector<std::vector<int>> GraphAlgorithms::GetLeastSpanningTree(const Graph &graph) {
     return least_spanning_tree_engine_.GetLeastSpanningTree(graph);
 }
-TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, const AlgorithmType algorithm_type) {
+TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, const enum AlgorithmType algorithm_type) {
     if (algorithm_type == AlgorithmType::kColonyAlgorithm) {
         return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
     }

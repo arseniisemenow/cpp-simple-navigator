@@ -2,9 +2,6 @@
 
 #include <random>
 
-#include "common/structs.h"
-#include "common/constants.h"
-
 namespace s21 {
 
     // Helper function to initialize pheromone levels on edges

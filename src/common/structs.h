@@ -4,7 +4,7 @@
 #include <vector>
 
 namespace s21 {
-enum class AlgorithmType {
+enum AlgorithmType {
     kColonyAlgorithm = 1 << 0,
     kBrutForceAlgorithm = 1 << 1,
     kHeldKarpAlgorithm = 1 << 2,
