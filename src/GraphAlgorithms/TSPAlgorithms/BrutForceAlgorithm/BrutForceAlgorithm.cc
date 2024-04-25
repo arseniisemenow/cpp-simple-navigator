@@ -21,7 +21,7 @@ TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) 
         double total_distance = 0.0;
         bool valid_path = true;
 
-        int current_vertex = 0; // Start at vertex 0
+        int current_vertex = 0;
         for (int i = 0; i < num_vertices - 1; ++i) {
             int next_vertex = vertices[i];
 
@@ -48,6 +48,7 @@ TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) 
         }
     } while (std::next_permutation(vertices.begin(), vertices.end()));
 
+    //todo: check for this
     min_path.insert(min_path.begin(), 0);
     min_path.push_back(0);
 
