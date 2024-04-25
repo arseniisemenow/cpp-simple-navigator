@@ -42,6 +42,8 @@ void UpdateProgressBar1() {
         if (s21::multithread::calculate_thread_1) {
             std::lock_guard<std::mutex> lock(s21::multithread::mutex_1);
 
+
+
             s21::multithread::progress_1 = (s21::multithread::progress_1 + 1);
 
             if (s21::multithread::progress_1 == 100) {

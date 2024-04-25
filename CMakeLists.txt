@@ -44,6 +44,14 @@ set(LEAST_SPANNING_TREE_ENGINE
     src/GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.h
 )
 
+set(COLONY_ALGORITHM_SOURCES
+        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
+        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
+)
+set(BRUT_FORCE_ALGORITHM_SOURCES
+        src/GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.cc
+        src/GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.h
+)
 set(HELD_KARP_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h
@@ -52,19 +60,16 @@ set(GENETIC_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h
 )
-set(COLONY_ALGORITHM_SOURCES
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
-)
 set(GRAPH_ALGORITHMS_SOURCES
         src/GraphAlgorithms/GraphAlgorithms.cc
         src/GraphAlgorithms/GraphAlgorithms.h
         ${SEARCH_ENGINE_SOURCES}
         ${SHORTEST_PATH_ENGINE}
         ${LEAST_SPANNING_TREE_ENGINE}
+        ${COLONY_ALGORITHM_SOURCES}
+        ${BRUT_FORCE_ALGORITHM_SOURCES}
         ${HELD_KARP_ALGORITHM_SOURCES}
         ${GENETIC_ALGORITHM_SOURCES}
-        ${COLONY_ALGORITHM_SOURCES}
 )
 
 set(GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES

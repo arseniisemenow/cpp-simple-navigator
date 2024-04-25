@@ -20,6 +20,9 @@ TspResult GraphAlgorithms::SolveTravelingSalesmanProblem(const Graph &graph, con
     if (algorithm_type == kColonyAlgorithm) {
         return colony_algorithm_.SolveTravelingSalesmanProblem(graph);
     }
+    if (algorithm_type == kBrutForceAlgorithm) {
+        return  brut_force_algorithm_.SolveTravelingSalesmanProblem(graph);
+    }
     if (algorithm_type == kAlgorithm1) {
         return algorithm_1_.SolveTravelingSalesmanProblem(graph);
     }

@@ -6,8 +6,9 @@
 namespace s21 {
 typedef enum {
     kColonyAlgorithm = 1 << 0,
-    kAlgorithm1 = 1 << 1,
-    kAlgorithm2 = 1 << 2,
+    kBrutForceAlgorithm = 1 << 1,
+    kAlgorithm1 = 1 << 2,
+    kAlgorithm2 = 1 << 3,
 } AlgorithmType;
 
 struct TspResult {
