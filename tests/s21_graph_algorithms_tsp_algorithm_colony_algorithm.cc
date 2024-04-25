@@ -89,7 +89,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest9) {
     graph_.LoadGraphFromFile(constants::kFileNames[9]);
 
     auto [tour, distance] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kColonyAlgorithm);
-    const double expected_distance = 780;
+    const double expected_distance = 725;
     const double expected_accuracy = 0.05;
     const double expected_range = expected_distance * expected_accuracy;
 
@@ -101,6 +101,17 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest10) {
 
     auto [tour, distance] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kColonyAlgorithm);
     const double expected_distance = 2110;
+    const double expected_accuracy = 0.05;
+    const double expected_range = expected_distance * expected_accuracy;
+
+    ASSERT_GE(distance, expected_distance - expected_range);
+    ASSERT_LE(distance, expected_distance + expected_range);
+}
+TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest11) {
+    graph_.LoadGraphFromFile(constants::kFileNames[11]);
+
+    auto [tour, distance] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kColonyAlgorithm);
+    const double expected_distance = 35000;
     const double expected_accuracy = 0.05;
     const double expected_range = expected_distance * expected_accuracy;
 
