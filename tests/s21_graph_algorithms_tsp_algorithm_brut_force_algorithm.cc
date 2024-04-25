@@ -12,22 +12,12 @@ class GraphAlgorithmsTspAlgorithmBrutForceAlgorithmTest : public ::testing::Test
 };
 
 TEST_F(GraphAlgorithmsTspAlgorithmBrutForceAlgorithmTest, BrutForceTest0) {
-    graph_.LoadGraphFromFile(constants::kFileNames[10]);
+    graph_.LoadGraphFromFile(constants::kFileNames[0]);
 
-    auto [vertices_1, distance_1] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kBrutForceAlgorithm);
-    auto [vertices_2, distance_2] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kHeldKarpAlgorithm);
-
-    std::cerr << "resulting distance: " << distance_1 << '\n';
-    std::cerr << "path: ";
-    for (const auto& elem : vertices_1) {
-        std::cerr << elem << ' ';
-    }
-    std::cerr << '\n';
-    std::cerr << "resulting distance: " << distance_2 << '\n';
-    std::cerr << "path: ";
-    for (const auto& elem : vertices_2) {
-        std::cerr << elem << ' ';
-    }
-    std::cerr << '\n';
+    auto [tour, distance] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kBrutForceAlgorithm);
+    const int expected_distance = 0;
+    const std::vector<int> expected_tour{0, 7, 4, 3, 9, 5, 2, 6, 1, 10, 8, 0};
+    ASSERT_EQ(tour, expected_tour);
+    ASSERT_EQ(distance, 253);
 }
 }// namespace s21
