@@ -12,7 +12,7 @@ class GraphAlgorithmsTspAlgorithmBrutForceAlgorithmTest : public ::testing::Test
 };
 
 TEST_F(GraphAlgorithmsTspAlgorithmBrutForceAlgorithmTest, BrutForceTest0) {
-    graph_.LoadGraphFromFile(constants::kFileNames[0]);
+    graph_.LoadGraphFromFile(constants::kFileNames[10]);
 
     auto [vertices_1, distance_1] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kBrutForceAlgorithm);
     auto [vertices_2, distance_2] = graph_algorithms_.SolveTravelingSalesmanProblem(graph_, kHeldKarpAlgorithm);
