@@ -1,55 +1,64 @@
 #include "MainMenu.h"
 
-#include "../../common/multithread.h"
 #include "cli/ChoiceOneMenu/ChoiceOneMenu.h"
-#include "common/constants.h"
+#include "cli/common/constants.h"
+#include "cli/ChooseFilePath/ChooseFilePath.h"
 
 int MainMenuCycle() {
-    const std::vector<MenuItem> menu_items = {
-        {"Choice 1", false},
-        {"Choice 2", false},
-        {"Choice 3", false},
-        {"Choice 4", false},
-        {"Exit", false}};
 
-    int selected_index = 0;
-    int c;
-    while (true) {
-        s21::multithread::stop_thread_1 = false;
-        s21::multithread::stop_thread_2 = false;
-        s21::multithread::calculate_thread_1 = false;
-        s21::multithread::calculate_thread_2 = false;
-        s21::multithread::progress_1 = 0;
-        s21::multithread::progress_2 = 0;
+  const std::vector<MenuItem> select_menu_items = {
+      {"Update Dataset Path", false},
+      {"Depth And Breadth First Search", false},
+      {"Find The Shortest Path Between Vertices", false},
+      {"Find Least Spanning Tree", false},
+      {"Travelling Salesman Problem", false},
+      {"Exit", false}};
 
-        DrawMenu(menu_items, selected_index);
-        c = getch();
-        switch (c) {
-            case KEY_UP:
-                if (selected_index > 0)
-                    --selected_index;
-                break;
-            case KEY_DOWN:
-                if (selected_index < static_cast<int>(menu_items.size()) - 1)
-                    ++selected_index;
-                break;
-            case 10:// Enter key
-                if (menu_items[selected_index].label == "Exit") {
-                    endwin();
-                    return 0;
-                } else {
-                    // Perform action for selected menu item
-                    clear();
-                    mvprintw(0, 0, "You chose %s", menu_items[selected_index].label.c_str());
-                    if (selected_index == 0) {
-                        ChoiceOneMenu();
-                        continue;
-                    }
-                    //todo: call from here another menus
-                    refresh();
-                    // getch();// Wait for user to press any key
-                }
-                break;
+  std::string dataset_path = GetCurrentWorkingDirectory();
+
+  int selected_index = 0;
+  int c;
+  while (true) {
+    DrawMenu(select_menu_items, selected_index, dataset_path);
+
+    c = getch();
+    switch (c) {
+      case KEY_UP:
+        if (selected_index > 0)
+          --selected_index;
+        break;
+      case KEY_DOWN:
+        if (selected_index < static_cast<int>(select_menu_items.size()) - 1)
+          ++selected_index;
+        break;
+      case 10:// Enter key
+        if (selected_index == s21::constants::cli::kDatasetPathIndex) {
+          ChooseFilePath(dataset_path);
+          continue;
         }
+        if (select_menu_items[selected_index].label == "Exit") {
+          endwin();
+          return 0;
+        } else {
+          clear();
+          if (selected_index == s21::constants::cli::kMenuItem1Index) {
+            ChoiceOneMenu();
+            continue;
+          }
+          if (selected_index == s21::constants::cli::kMenuItem2Index) {
+            continue;
+          }
+          if (selected_index == s21::constants::cli::kMenuItem3Index) {
+            continue;
+          }
+          if (selected_index == s21::constants::cli::kMenuItem4Index) {
+            continue;
+          }
+//          //todo: call from here another menus
+//          refresh();
+//          // getch();// Wait for user to press any key
+        }
+        break;
     }
+  }
 }

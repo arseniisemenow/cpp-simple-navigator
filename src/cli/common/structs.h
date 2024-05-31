@@ -3,7 +3,7 @@
 #include <string>
 
 struct MenuItem {
-    std::string label;
-    bool selected;
+  std::string label;
+  bool selected;
 };
 #endif //STRUCTS_H

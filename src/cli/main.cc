@@ -5,7 +5,6 @@
 #include "common/structs.h"
 #include "MainMenu/MainMenu.h"
 
-
 int main() {
     initscr();
     cbreak();

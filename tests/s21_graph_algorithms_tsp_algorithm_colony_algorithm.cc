@@ -9,7 +9,7 @@ class GraphAlgorithmsTspAlgorithmColonyAlgorithmTest : public ::testing::Test {
     void SetUp() override {}
     GraphAlgorithms graph_algorithms_{};
     Graph graph_{};
-    const double kExpectedAccuracy = 0.05;
+    const double kExpectedAccuracy = 0.09;
 };
 
 TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest0) {

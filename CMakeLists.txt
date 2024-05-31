@@ -198,7 +198,9 @@ add_executable(cli
         src/cli/Menu/menu.h
         src/cli/ChoiceOneMenu/ChoiceOneMenu.cc
         src/cli/ChoiceOneMenu/ChoiceOneMenu.h
-        src/common/multithread.h
+        src/cli/ChooseFilePath/ChooseFilePath.cpp
+        src/cli/ChooseFilePath/ChooseFilePath.h
+        src/cli/common/constants.h
 )
 
 find_package(Curses REQUIRED)

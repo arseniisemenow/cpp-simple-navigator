@@ -4,14 +4,14 @@
 #include "constants.h"
 
 namespace s21 {
-class GraphAlgorithmsTspAlgorithmUnknownAlgorithmTest : public ::testing::Test {
+class GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest : public ::testing::Test {
  protected:
     void SetUp() override {}
     //Colo tsp_algorithm_{};
     Graph graph_{};
 };
 
-TEST_F(GraphAlgorithmsTspAlgorithmUnknownAlgorithmTest, HeldKarpTest0) {
+TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, HeldKarpTest0) {
 
 }
 }
