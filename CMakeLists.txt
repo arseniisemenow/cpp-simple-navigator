@@ -194,13 +194,17 @@ add_executable(cli
         src/cli/MainMenu/MainMenu.cc
         src/cli/MainMenu/MainMenu.h
         src/cli/common/structs.h
-        src/cli/Menu/menu.cc
-        src/cli/Menu/menu.h
-        src/cli/ChoiceOneMenu/ChoiceOneMenu.cc
-        src/cli/ChoiceOneMenu/ChoiceOneMenu.h
+        src/cli/DrawMenu/DrawMenu.cc
+        src/cli/DrawMenu/DrawMenu.h
+        src/cli/ItemOneMenu/ItemOneMenu.cc
+        src/cli/ItemOneMenu/ItemOneMenu.h
         src/cli/ChooseFilePath/ChooseFilePath.cpp
         src/cli/ChooseFilePath/ChooseFilePath.h
         src/cli/common/constants.h
+        src/cli/ItemTwoMenu/ItemTwoMenu.cc
+        src/cli/ItemFourMenu/ItemFourMenu.cc
+        src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.cc
+        src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
 )
 
 find_package(Curses REQUIRED)

@@ -3,7 +3,7 @@
 
 #include <ncurses.h>
 
-#include "cli/Menu/Menu.h"
+#include "cli/DrawMenu/DrawMenu.h"
 #include "cli/common/structs.h"
 
 int MainMenuCycle();

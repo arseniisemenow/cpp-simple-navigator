@@ -10,7 +10,6 @@ int main() {
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-
     MainMenuCycle();
     endwin();
     return 0;

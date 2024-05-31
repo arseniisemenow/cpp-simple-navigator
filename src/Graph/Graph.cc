@@ -94,4 +94,8 @@ int Graph::GetDistance(const int vertex_1, const int vertex_2) const {
 int Graph::GetSize() const {
     return static_cast<int>(adjacency_matrix_.size());
 }
+
+void Graph::Clear() {
+    adjacency_matrix_.clear();
+}
 }// namespace s21
