@@ -4,13 +4,12 @@
 #include "cli/ParseDatasetPath/ParseDatasetPath.h"
 
 void DrawMainMenu(const std::vector<MenuItem> &items, const int selected_index,
-    const std::string &dataset_path, const std::vector<std::string> &graphs) {
+                  const std::string &dataset_path, const std::vector<std::string> &graphs) {
     clear();
 
     mvprintw(0, 0, "Dataset Path: %s", dataset_path.c_str());
     if (graphs.empty()) {
-    mvprintw(1, 0, "Dataset Path does NOT contain any txt files!", dataset_path.c_str());
-
+        mvprintw(1, 0, "Dataset Path does NOT contain any txt files!", dataset_path.c_str());
     }
 
     start_color();

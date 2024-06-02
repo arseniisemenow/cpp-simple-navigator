@@ -1,6 +1,7 @@
 #include "DepthAndBreadthFirstSearchMenu.h"
 
 #include <ncurses.h>
+
 #include "GraphAlgorithms/GraphAlgorithms.h"
 
 void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs) {
@@ -15,6 +16,13 @@ void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs)
         clear();
         mvprintw(0, 0, "DFS/BFS Algorithm Menu");
         mvprintw(2, 0, "Select Graph:");
+
+        int row, col;
+        getmaxyx(stdscr, row, col);
+
+        // Create a window for the file path selection UI
+        mvprintw(row - 2, 0, "Use number key to input the number");
+        mvprintw(row - 1, 0, "Use Backspace to correct the number");
 
         // List all graphs with their names
         for (size_t i = 0; i < graphs.size(); ++i) {
@@ -51,10 +59,13 @@ void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs)
                     start_index_input.pop_back();
                 }
                 break;
-            case 10: // Enter key
+            case 10:// Enter key
                 break;
             case 's':
                 if (start_index_input.empty()) {
+                    clear();
+                    mvprintw(0, 0, "start index must be not empty");
+                    getch();
                 } else {
                     const int start_index = std::stoi(start_index_input);
                     clear();
@@ -71,6 +82,9 @@ void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs)
                 break;
             case 'b':
                 if (start_index_input.empty()) {
+                    clear();
+                    mvprintw(0, 0, "start index must be not empty");
+                    getch();
                 } else {
                     const int start_index = std::stoi(start_index_input);
                     clear();
@@ -90,7 +104,9 @@ void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs)
                 break;
             default:
                 if (isdigit(ch)) {
-                    start_index_input += ch;
+                    if (start_index_input.length() < 5) {
+                        start_index_input += ch;
+                    }
                 }
                 break;
         }
