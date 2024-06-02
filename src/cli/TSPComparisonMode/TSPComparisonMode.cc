@@ -26,6 +26,7 @@ void ShowLoadingIndicator(int row, std::atomic<bool> &running) {
     const char *animation = "|/-\\";
     int i = 0;
     while (running) {
+
         mvprintw(row, 40, "%c", animation[i % 4]);
         refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -33,15 +34,11 @@ void ShowLoadingIndicator(int row, std::atomic<bool> &running) {
     }
 }
 
-void TSPComparisonMode(const std::vector<std::string> &graphs) {
+void TSPComparisonMode(const std::vector<std::string> &graphs, int &selected_graph_index, std::vector<s21::AlgorithmType> &selected_algorithms, int &num_runs) {
     s21::GraphAlgorithms graph_algorithms{};
     s21::Graph graph{};
-
-    int selected_graph_index = 0;
-    std::vector<s21::AlgorithmType> selected_algorithms;
     bool running = true;
     bool start = false;
-    int num_runs = 1;
 
     while (running) {
         clear();
@@ -148,7 +145,7 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
             running_flags[i] = true;
             threads.emplace_back([&, i]() {
                 std::atomic<bool> &running = running_flags[i];
-                std::thread loading_thread(ShowLoadingIndicator, 3 + graphs.size() + 2 + i, std::ref(running));
+                std::thread loading_thread(ShowLoadingIndicator, 3 + graphs.size() + 2, std::ref(running));
 
                 auto start_time = std::chrono::high_resolution_clock::now();
                 for (int j = 0; j < num_runs; ++j) {
@@ -202,7 +199,7 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
 
         mvprintw(result_row + 1, 0, "Press any key to return to TSP Comparison Mode.");
         getch();
-        TSPComparisonMode(graphs); // Returning to the TSPComparisonMode loop
+        TSPComparisonMode(graphs, selected_graph_index, selected_algorithms, num_runs);
         start = false;
         running = true;
     }

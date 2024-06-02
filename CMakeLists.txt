@@ -196,11 +196,10 @@ add_executable(cli
         src/cli/common/structs.h
         src/cli/DrawMenu/DrawMenu.cc
         src/cli/DrawMenu/DrawMenu.h
-        src/cli/ChooseFilePath/ChooseFilePath.cpp
-        src/cli/ChooseFilePath/ChooseFilePath.h
+        src/cli/ChooseFilePath/FilePathHandler.cc
+        src/cli/ChooseFilePath/FilePathHandler.h
         src/cli/common/constants.h
         src/cli/ItemTwoMenu/ItemTwoMenu.cc
-        src/cli/ItemFourMenu/ItemFourMenu.cc
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.cc
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
         src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h
