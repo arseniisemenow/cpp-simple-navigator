@@ -14,8 +14,8 @@ inline constexpr int kMenuItem1Index{1};
 inline constexpr int kMenuItem2Index{2};
 }
 namespace s21::constants::cli::item_2{
-inline constexpr int kMenuItem1Index{1};
-inline constexpr int kMenuItem2Index{2};
+inline constexpr int kMenuItem1Index{0};
+inline constexpr int kMenuItem2Index{1};
 }
 namespace s21::constants::cli::item_3{
 inline constexpr int kMenuItem1Index{1};

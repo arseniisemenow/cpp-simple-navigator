@@ -205,6 +205,8 @@ add_executable(cli
         src/cli/ItemFourMenu/ItemFourMenu.cc
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.cc
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
+        src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h
+        src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.cc
 )
 
 find_package(Curses REQUIRED)

@@ -5,7 +5,7 @@
 #include "cli/common/constants.h"
 #include "cli/common/structs.h"
 
-int ItemOneMenuCycle() {
+int ItemOneMenuCycle(const std::vector<std::string> &graphs) {
 
     const std::vector<MenuItem> select_menu_items = {
         {"Depth First Search", false},

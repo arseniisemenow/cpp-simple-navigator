@@ -54,15 +54,15 @@ int MainMenuCycle() {
         } else {
           clear();
           if (selected_index == s21::constants::cli::kMenuItem1Index) {
-            ItemOneMenuCycle();
+            ItemOneMenuCycle(graphs);
             continue;
           }
           if (selected_index == s21::constants::cli::kMenuItem2Index) {
-            ItemTwoMenuCycle();
+            ItemTwoMenuCycle(graphs);
             continue;
           }
           if (selected_index == s21::constants::cli::kMenuItem3Index) {
-            LeastSpanningTreeCycle(graphs);
+            LeastSpanningTreeMenuCycle(graphs);
             continue;
           }
           if (selected_index == s21::constants::cli::kMenuItem4Index) {

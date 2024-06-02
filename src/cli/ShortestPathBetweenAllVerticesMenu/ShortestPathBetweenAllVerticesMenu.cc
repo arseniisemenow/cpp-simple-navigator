@@ -1,8 +1,7 @@
-#include "LeastSpanningTreeMenu.h"
-
+#include "ShortestPathBetweenAllVerticesMenu.h"
 #include "GraphAlgorithms/GraphAlgorithms.h"
 
-void LeastSpanningTreeMenuCycle(const std::vector<std::string> &graphs) {
+void ShortestPathBetweenAllVerticesMenuCycle(const std::vector<std::string> &graphs) {
     s21::GraphAlgorithms graph_algorithms{};
     s21::Graph graph{};
 
@@ -46,11 +45,11 @@ void LeastSpanningTreeMenuCycle(const std::vector<std::string> &graphs) {
             case 's':
                 clear();
                 graph.LoadGraphFromFile(graphs[selected_graph_index]);
-                auto least_spanning_tree = graph_algorithms.GetLeastSpanningTree(graph);
-                
-                for (size_t i = 0; i < least_spanning_tree.size(); ++i) {
-                    for (size_t j = 0; j < least_spanning_tree[i].size(); ++j) {
-                        mvprintw(3 + i, 2 + j * 4, "%d", least_spanning_tree[i][j]);
+                auto matrix = graph_algorithms.GetShortestPathsBetweenAllVertices(graph);
+
+                for (size_t i = 0; i < matrix.size(); ++i) {
+                    for (size_t j = 0; j < matrix[i].size(); ++j) {
+                        mvprintw(3 + i, 2 + j * 4, "%d", matrix[i][j]);
                     }
                 }
                 graph.Clear();
