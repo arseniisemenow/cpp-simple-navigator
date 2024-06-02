@@ -3,6 +3,8 @@
 #include <vector>
 
 #include "cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h"
+#include "cli/ShortestPathBetweenVerticesMenu/ShortestPathBetweenVerticesMenu.h"
+
 #include "cli/common/constants.h"
 #include "cli/common/structs.h"
 
@@ -34,7 +36,7 @@ int ItemTwoMenuCycle(const std::vector<std::string> &graphs) {
                 }
                 clear();
                 if (selected_index == s21::constants::cli::item_2::kMenuItem1Index) {
-                    //todo: call another window
+                    ShortestPathBetweenVerticesMenuCycle(graphs);
                     continue;
                 }
                 if (selected_index == s21::constants::cli::item_2::kMenuItem2Index) {

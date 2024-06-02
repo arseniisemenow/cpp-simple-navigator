@@ -205,6 +205,8 @@ add_executable(cli
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
         src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h
         src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.cc
+        src/cli/ShortestPathBetweenVerticesMenu/ShortestPathBetweenVerticesMenu.h
+        src/cli/ShortestPathBetweenVerticesMenu/ShortestPathBetweenVerticesMenu.cc
         src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.cc
         src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.h
         src/cli/ParseDatasetPath/ParseDatasetPath.cc
