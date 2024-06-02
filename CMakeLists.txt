@@ -211,6 +211,8 @@ add_executable(cli
         src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.h
         src/cli/ParseDatasetPath/ParseDatasetPath.cc
         src/cli/ParseDatasetPath/ParseDatasetPath.h
+        src/cli/TSPComparisonMode/TSPComparisonMode.h
+        src/cli/TSPComparisonMode/TSPComparisonMode.cc
 )
 
 find_package(Curses REQUIRED)

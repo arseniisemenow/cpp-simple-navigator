@@ -1,10 +1,12 @@
+#include "ItemFourMenu.h"
+
 #include <vector>
 
-#include "ItemFourMenu.h"
+#include "cli/TSPComparisonMode/TSPComparisonMode.h"
 #include "cli/common/constants.h"
 #include "cli/common/structs.h"
 
-int ItemFourMenuCycle() {
+int ItemFourMenuCycle(const std::vector<std::string> &graphs) {
   const std::vector<MenuItem> select_menu_items = {
       {"Single Algorithm Mode", false},
       {"Comparison Mode", false},
@@ -32,6 +34,7 @@ int ItemFourMenuCycle() {
         } else {
           clear();
           if (selected_index == s21::constants::cli::item_3::kMenuItem1Index) {
+              TSPComparisonMode(graphs);
             //todo: call another window
             continue;
           }

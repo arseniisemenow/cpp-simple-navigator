@@ -35,6 +35,9 @@ void DijkstraEngine::UpdateDistances(const Graph& graph, const int current_verte
 int DijkstraEngine::GetShortestPathBetweenVertices(const Graph& graph, int vertex_1, int vertex_2) {
     vertex_1 -= 1;
     vertex_2 -= 1;
+    if (graph.IsEmpty()) {
+        return 0;
+    }
     if (vertex_1 < 0 || vertex_2 < 0 || vertex_1 >= graph.GetGraph().size() || vertex_2 >= graph.GetSize()) {
         return 0;
     }

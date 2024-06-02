@@ -5,10 +5,11 @@
 
 namespace s21 {
 enum AlgorithmType {
-    kColonyAlgorithm = 1 << 0,
-    kBrutForceAlgorithm = 1 << 1,
-    kHeldKarpAlgorithm = 1 << 2,
-    kGeneticAlgorithm = 1 << 3,
+    kNone = 0,
+    kColonyAlgorithm = 1,
+    kBrutForceAlgorithm = 2,
+    kHeldKarpAlgorithm = 3,
+    kGeneticAlgorithm = 4,
 };
 
 

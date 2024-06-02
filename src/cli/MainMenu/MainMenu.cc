@@ -61,12 +61,10 @@ int MainMenuCycle() {
                         continue;
                     }
                     if (selected_index == s21::constants::cli::kMenuItem4Index) {
-                        ItemFourMenuCycle();
+                        ItemFourMenuCycle(graphs);
                         continue;
                     }
                 }
-
-                //          refresh();
                 //          // getch();// Wait for user to press any key
                 break;
         }
