@@ -7,7 +7,8 @@
 #include <atomic>
 #include <sstream>
 #include <iomanip>
-#include <algorithm>
+#include <numeric>
+#include <limits>
 
 #include "GraphAlgorithms/GraphAlgorithms.h"
 
@@ -40,6 +41,7 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
     std::vector<s21::AlgorithmType> selected_algorithms;
     bool running = true;
     bool start = false;
+    int num_runs = 1;
 
     while (running) {
         clear();
@@ -79,8 +81,9 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
             }
         }
 
-        mvprintw(3 + graphs.size() + 7, 0, "Press 's' to start the algorithms.");
-        mvprintw(3 + graphs.size() + 8, 0, "Press 'q' to return to the main menu.");
+        mvprintw(3 + graphs.size() + 7, 0, "Number of runs: %d (Use '[' / ']' to change)", num_runs);
+        mvprintw(3 + graphs.size() + 8, 0, "Press 's' to start the algorithms.");
+        mvprintw(3 + graphs.size() + 9, 0, "Press 'q' to return to the main menu.");
 
         int ch = getch();
         switch (ch) {
@@ -110,6 +113,14 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
                 }
                 break;
             }
+            case ']':
+                ++num_runs;
+                break;
+            case '[':
+                if (num_runs > 1) {
+                    --num_runs;
+                }
+                break;
             case 's':
                 if (selected_algorithms.empty()) {
                     clear();
@@ -121,15 +132,14 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
                 }
                 break;
             case 'q':
-                running = false;
-                break;
+                return;
         }
     }
 
-    if (start) {
+    while (start) {
         std::vector<std::thread> threads;
         std::vector<std::atomic<bool>> running_flags(selected_algorithms.size());
-        std::vector<s21::TspResult> results(selected_algorithms.size());
+        std::vector<std::vector<s21::TspResult>> results(selected_algorithms.size(), std::vector<s21::TspResult>(num_runs));
         std::vector<std::chrono::duration<double>> durations(selected_algorithms.size());
 
         graph.LoadGraphFromFile(graphs[selected_graph_index]);
@@ -141,7 +151,9 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
                 std::thread loading_thread(ShowLoadingIndicator, 3 + graphs.size() + 2 + i, std::ref(running));
 
                 auto start_time = std::chrono::high_resolution_clock::now();
-                results[i] = graph_algorithms.SolveTravelingSalesmanProblem(graph, selected_algorithms[i]);
+                for (int j = 0; j < num_runs; ++j) {
+                    results[i][j] = graph_algorithms.SolveTravelingSalesmanProblem(graph, selected_algorithms[i]);
+                }
                 auto end_time = std::chrono::high_resolution_clock::now();
 
                 durations[i] = end_time - start_time;
@@ -160,19 +172,38 @@ void TSPComparisonMode(const std::vector<std::string> &graphs) {
         mvprintw(0, 0, "TSP Comparison Results:");
 
         int result_row = 2;
-        mvprintw(result_row, 0, "Algorithm                 Time (s)   Distance");
+        mvprintw(result_row, 0, "Algorithm                 Time (s)    Avg Distance    Total Time    Min Distance    Max Distance");
         result_row++;
-        mvprintw(result_row, 0, "-------------------------------------------------");
+        mvprintw(result_row, 0, "-----------------------------------------------------------------------------------------------");
         result_row++;
 
         for (size_t i = 0; i < selected_algorithms.size(); ++i) {
-            std::ostringstream time_stream;
-            time_stream << std::fixed << std::setprecision(2) << durations[i].count();
+            std::ostringstream time_stream, total_time_stream;
+            time_stream << std::fixed << std::setprecision(2) << (durations[i].count() / num_runs);
+            total_time_stream << std::fixed << std::setprecision(2) << durations[i].count();
 
-            mvprintw(result_row, 0, "%-25s %-10s %lf", AlgorithmTypeToString(selected_algorithms[i]), time_stream.str().c_str(), results[i].distance);
+            double total_distance = std::accumulate(results[i].begin(), results[i].end(), 0.0,
+                [](double sum, const s21::TspResult &result) {
+                    return sum + result.distance;
+                });
+
+            double average_distance = total_distance / num_runs;
+            double min_distance = std::numeric_limits<double>::max();
+            double max_distance = std::numeric_limits<double>::min();
+
+            for (const auto &result : results[i]) {
+                if (result.distance < min_distance) min_distance = result.distance;
+                if (result.distance > max_distance) max_distance = result.distance;
+            }
+
+            mvprintw(result_row, 0, "%-25s %-10s %-14.2f %-12s %-14.2f %-14.2f", AlgorithmTypeToString(selected_algorithms[i]), time_stream.str().c_str(), average_distance, total_time_stream.str().c_str(), min_distance, max_distance);
             result_row++;
         }
 
+        mvprintw(result_row + 1, 0, "Press any key to return to TSP Comparison Mode.");
         getch();
+        TSPComparisonMode(graphs); // Returning to the TSPComparisonMode loop
+        start = false;
+        running = true;
     }
 }
