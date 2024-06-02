@@ -15,6 +15,7 @@ class Graph {
     [[nodiscard]]int GetSize() const;
     void SetGraph(const std::vector<std::vector<int>>& adjacency_matrix);
     void Clear();
+    bool IsEmpty() const;
  private:
     std::vector<std::vector<int>> adjacency_matrix_{};
 };

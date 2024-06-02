@@ -196,8 +196,6 @@ add_executable(cli
         src/cli/common/structs.h
         src/cli/DrawMenu/DrawMenu.cc
         src/cli/DrawMenu/DrawMenu.h
-        src/cli/ItemOneMenu/ItemOneMenu.cc
-        src/cli/ItemOneMenu/ItemOneMenu.h
         src/cli/ChooseFilePath/ChooseFilePath.cpp
         src/cli/ChooseFilePath/ChooseFilePath.h
         src/cli/common/constants.h
@@ -207,6 +205,10 @@ add_executable(cli
         src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
         src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h
         src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.cc
+        src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.cc
+        src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.h
+        src/cli/ParseDatasetPath/ParseDatasetPath.cc
+        src/cli/ParseDatasetPath/ParseDatasetPath.h
 )
 
 find_package(Curses REQUIRED)
