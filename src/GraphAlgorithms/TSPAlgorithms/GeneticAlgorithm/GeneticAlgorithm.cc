@@ -12,173 +12,152 @@ namespace s21::tsp_genetic_constants {
 }
 
 namespace s21 {
-TspResult GeneticAlgorithm::SolveTravelingSalesmanProblem(const Graph &graph) {
+TspResult GeneticAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
     TspResult result{};
+
+    distances_.clear();
+    distances_ = graph.GetGraph();
 
     std::vector<std::vector<int>> population{ PerformGeneticAlgorithm(graph) };
     std::vector<int> total_distances_traveled{};
     for (const auto& individual : population) {
-        total_distances_traveled.push_back(CalcualateDistanceTraveled(individual));
+        total_distances_traveled.push_back(
+                CalcualateIndividualTotalDistance(individual));
     }
 
-    result.distance = *std::min_element(total_distances_traveled.begin(), total_distances_traveled.end());
+    result.distance = *std::min_element(total_distances_traveled.begin(),
+                                        total_distances_traveled.end());
+    result.vertices = population.front();
 
     return result;
 }
 
 std::vector<std::vector<int>> GeneticAlgorithm::PerformGeneticAlgorithm(const Graph& graph) {
-    distances_.clear();
-    distances_ = graph.GetGraph();
-
     std::vector<int> list_of_cities{ graph.GetGraph()[0] };
-    std::vector<std::vector<int>> population{ InitializePopulation(list_of_cities) };
-    std::vector<double> fitness_probabilities{ CalculateFitnessProbabilities(population) };
+    std::vector<std::vector<int>> population{
+            InitializePopulation(list_of_cities.size()) };
 
-    std::uniform_real_distribution<double> mutation_distr{ 0.0, 1.0 };
     for (int generation{ 0 };
-        generation < tsp_genetic_constants::kNumberOfGenerations;
-        ++generation) {
-        std::vector<std::vector<int>> parents{};
+            generation < tsp_genetic_constants::kNumberOfGenerations;
+            ++generation) {
+        std::vector<double> fitness_probs{
+                CalculateFitnessProbabilities(population) };
+        std::vector<std::vector<int>> parents_list{};
+
         for (int i{ 0 };
-             i < static_cast<int>(tsp_genetic_constants::kCrossoverRate *
-                                  tsp_genetic_constants::kPopulationSize); ++i) {
-            parents.push_back(SelectIndividual(population, fitness_probabilities));
+                i < static_cast<int>(tsp_genetic_constants::kCrossoverRate *
+                                     tsp_genetic_constants::kPopulationSize);
+                ++i) {
+            parents_list.push_back(SelectIndividual(population, fitness_probs));
         }
 
-        // this loop is erroneous
-        std::vector<std::vector<int>> offsprings{};
-        for (std::size_t i{ 0 }; i < parents.size(); i += 2) {
-            auto [first_offspring, second_offspring]{
-                    CrossOver(parents[i], parents[i + 1]) };
+        std::vector<std::vector<int>> offspring_list{ PerformMutations(parents_list) };
 
-            std::cerr << "i: " << i << '\n';
-            double mutation_threshold{ mutation_distr(number_generator_) };
-            if (mutation_threshold > (1.0 - tsp_genetic_constants::kMutationRate)) {
-                first_offspring = MutateOffspring(first_offspring);
-            }
+        std::vector<std::vector<int>> mixed_offspring{ parents_list };
+        mixed_offspring.insert(mixed_offspring.end(),
+                               offspring_list.begin(), offspring_list.end());
 
-            mutation_threshold = mutation_distr(number_generator_);
-            if (mutation_threshold > (1.0 - tsp_genetic_constants::kMutationRate)) {
-                second_offspring = MutateOffspring(second_offspring);
-            }
+        fitness_probs = CalculateFitnessProbabilities(mixed_offspring);
+        std::vector<std::size_t> sorted_indices(mixed_offspring.size());
+        std::iota(sorted_indices.begin(), sorted_indices.end(), 0);
+        std::sort(sorted_indices.begin(), sorted_indices.end(),
+                  [&](std::size_t i, std::size_t j) {
+                        return fitness_probs[i] > fitness_probs[j];
+                    });
 
-            offsprings.push_back(first_offspring);
-            offsprings.push_back(second_offspring);
+        std::vector<std::vector<int>> new_population{};
+        for (std::size_t i{ 0 }; i < tsp_genetic_constants::kPopulationSize; ++i) {
+            new_population.push_back(mixed_offspring[sorted_indices[i]]);
         }
 
-        std::vector<std::vector<int>> mixed_offsprings{ parents };
-        mixed_offsprings.insert(mixed_offsprings.end(), offsprings.begin(), offsprings.end());
-
-        fitness_probabilities = CalculateFitnessProbabilities(mixed_offsprings);
-        std::vector<int> sorted_fitness_indices(fitness_probabilities.size());
-        std::iota(sorted_fitness_indices.begin(), sorted_fitness_indices.end(), 0);
-        std::sort(sorted_fitness_indices.begin(), sorted_fitness_indices.end(),
-                [&](int i, int j) { return fitness_probabilities[i] > fitness_probabilities[j]; });
-
-        std::vector<std::vector<int>> best_mixed_offsprings{};
-        int number_of_best_offsprings{ static_cast<int>(0.8 * tsp_genetic_constants::kPopulationSize) };
-        for (int i{ 0 }; i < number_of_best_offsprings; ++i) {
-            best_mixed_offsprings.push_back(mixed_offsprings[sorted_fitness_indices[i]]);
-        }
-
-        std::vector<int> old_population_indices{};
-        int old_population_size{ static_cast<int>(0.2 * tsp_genetic_constants::kPopulationSize) };
-        std::uniform_int_distribution<int> distr{ 0, tsp_genetic_constants::kPopulationSize - 1 };
-        for (int i{ 0 }; i < old_population_size; ++i) {
-            old_population_indices.push_back(distr(number_generator_));
-        }
-
-        for (int i : old_population_indices) {
-            best_mixed_offsprings.push_back(population[i]);
-        }
-
-        std::shuffle(best_mixed_offsprings.begin(), best_mixed_offsprings.end(), number_generator_);
-
-        population = best_mixed_offsprings;
+        population = new_population;
     }
 
     return population;
 }
 
-std::vector<std::vector<int>> GeneticAlgorithm::InitializePopulation(const std::vector<int>& list_of_cities) {
+std::vector<std::vector<int>> GeneticAlgorithm::PerformMutations(const std::vector<std::vector<int>>& parents_list) {
+    std::vector<std::vector<int>> offspring_list{};
+    std::uniform_real_distribution<double> dist_mutation{ 0.0, 1.0 };
+    for (std::size_t i{ 0 }; i < parents_list.size(); i += 2) {
+        auto [offspring_1, offspring_2]{ CrossOver(parents_list[i], parents_list[i + 1]) };
+
+        if (dist_mutation(number_generator_) <
+                tsp_genetic_constants::kMutationRate) {
+            offspring_1 = MutateOffspring(offspring_1);
+        }
+        if (dist_mutation(number_generator_) <
+                tsp_genetic_constants::kMutationRate) {
+            offspring_2 = MutateOffspring(offspring_2);
+        }
+
+        offspring_list.push_back(offspring_1);
+        offspring_list.push_back(offspring_2);
+    }
+
+    return offspring_list;
+}
+
+std::vector<std::vector<int>> GeneticAlgorithm::InitializePopulation(int number_of_cities) {
     std::vector<std::vector<int>> population{};
-    std::vector<std::vector<int>> all_permutations{ GenerateAllPermutations(list_of_cities) };
-
-    std::vector<int> random_identifiers(all_permutations.size());
-    std::iota(random_identifiers.begin(), random_identifiers.end(), 0);
-    std::shuffle(random_identifiers.begin(), random_identifiers.end(), number_generator_);
-    random_identifiers.resize(tsp_genetic_constants::kPopulationSize);
-
-    for (int i : random_identifiers) {
-        population.push_back(all_permutations[i]);
+    for (int i{ 0 }; i < tsp_genetic_constants::kPopulationSize; ++i) {
+        population.push_back(GeneratePermutation(number_of_cities));
     }
 
     return population;
 }
 
-struct VectorHash {
-    size_t operator()(const std::vector<int>& vec) const {
-        size_t hash = 0;
-        for (int elem : vec) {
-            hash ^= std::hash<int>()(elem) + (hash << 6) + (hash >> 2);
-        }
-        return hash;
-    }
-};
+std::vector<int> GeneticAlgorithm::GeneratePermutation(int size) {
+    std::vector<int> permutation(size);
+    std::iota(permutation.begin(), permutation.end(), 0);
+    std::shuffle(permutation.begin(), permutation.end(), number_generator_);
 
-std::vector<std::vector<int>> GeneticAlgorithm::GenerateAllPermutations(std::vector<int> list_of_cities) {
-    std::vector<std::vector<int>> population_perms;
-    std::unordered_set<std::vector<int>, VectorHash> unique_perms;
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-
-    while (population_perms.size() < tsp_genetic_constants::kPopulationSize) {
-        std::vector<int> perm = list_of_cities;
-        std::shuffle(perm.begin(), perm.end(), gen);
-        if (unique_perms.insert(perm).second) {
-            population_perms.push_back(perm);
-        }
-    }
-
-    return population_perms;
+    return permutation;
 }
 
-int GeneticAlgorithm::CalcualateDistanceTraveled(const std::vector<int>& cities) {
-    int distance_traveled{ 0 };
+int GeneticAlgorithm::CalcualateIndividualTotalDistance(const std::vector<int>& individual) {
+    int total_distance{ 0 };
+    std::size_t number_of_cities{ individual.size() };
 
-    for (std::size_t i{ 0 }; i < cities.size(); ++i) {
-        if (i == cities.size() - 1) {
-            distance_traveled += distances_[i][0];
-        } else {
-            distance_traveled += distances_[i][i + 1];
+    for (std::size_t i{ 0 }; i < number_of_cities; ++i) {
+        int from{ individual[i] };
+        int to{ individual[(i + 1) % number_of_cities] };
+
+        if (distances_[from][to] == 0) {
+            return std::numeric_limits<int>::max();
         }
-    }
 
-    return distance_traveled;
+        total_distance += distances_[from][to];
+    }
+    return total_distance;
 }
 
 std::vector<double> GeneticAlgorithm::CalculateFitnessProbabilities(
             const std::vector<std::vector<int>>& population) {
-    std::vector<int> population_distances{};
-    for (const auto& individual : population) {
-        population_distances.push_back(CalcualateDistanceTraveled(individual));
+    std::vector<int> total_dist_all_individuals(population.size());
+    for (std::size_t i{ 0 }; i < population.size(); ++i) {
+        total_dist_all_individuals[i] =
+                CalcualateIndividualTotalDistance(population[i]);
     }
 
-    int max_population_cost{ *std::max_element(population_distances.begin(), population_distances.end()) };
-    std::vector<int> population_fitness{};
-    for (int distance : population_distances) {
-        population_fitness.push_back(max_population_cost - distance);
+    int max_population_cost{
+            *std::max_element(total_dist_all_individuals.begin(),
+                              total_dist_all_individuals.end()) };
+    std::vector<double> population_fitness(population.size());
+    for (std::size_t i{ 0 }; i < population.size(); ++i) {
+        population_fitness[i] =
+                max_population_cost - total_dist_all_individuals[i];
     }
 
-    double population_fitness_sum{ static_cast<double>(std::reduce(population_fitness.begin(), population_fitness.end())) };
+    double population_fitness_sum{
+            std::accumulate(population_fitness.begin(),
+                            population_fitness.end(), 0.0) };
 
-    std::vector<double> fitness_probabilities{};
-    for (int fitness : population_fitness) {
-        fitness_probabilities.push_back(fitness / population_fitness_sum);
+    for (std::size_t i{ 0 }; i < population_fitness.size(); ++i) {
+        population_fitness[i] /= population_fitness_sum;
     }
 
-    return fitness_probabilities;
+    return population_fitness;
 }
 
 std::vector<int> GeneticAlgorithm::SelectIndividual(
@@ -190,7 +169,6 @@ std::vector<int> GeneticAlgorithm::SelectIndividual(
     std::uniform_real_distribution<double> distribution{ 0.0, 1.0 };
 
     double random_number{ distribution(number_generator_) };
-    // this doesnt work properly
     auto iter{ std::lower_bound(fitness_probabilities_cumulative_sum.begin(),
             fitness_probabilities_cumulative_sum.end(), random_number) };
     long selected_individual_index{
@@ -201,15 +179,29 @@ std::vector<int> GeneticAlgorithm::SelectIndividual(
 
 std::pair<std::vector<int>, std::vector<int>> GeneticAlgorithm::CrossOver(
         const std::vector<int>& first_parent, const std::vector<int>& second_parent) {
-    std::uniform_int_distribution<int> distribution{ 1, static_cast<int>(distances_.size() - 1) };
-    int point_of_split{ distribution(number_generator_) };
+    int number_of_cities{ static_cast<int>(first_parent.size()) };
 
-    std::vector<int> first_offspring(first_parent.begin(), first_parent.begin() + point_of_split);
-    std::vector<int> second_offspring(second_parent.begin(), second_parent.begin() + point_of_split);
+    std::uniform_int_distribution<int> dist_cut{ 1, number_of_cities - 1 };
+    int cut{ dist_cut(number_generator_) };
 
-    for (int i{ point_of_split }; i < static_cast<int>(first_parent.size()); ++i) {
-        first_offspring[i] = second_parent[i];
-        second_offspring[i] = first_parent[i];
+    std::vector<int> first_offspring{};
+    std::vector<int> second_offspring{};
+
+    first_offspring = std::vector<int>(first_parent.begin(), first_parent.begin() + cut);
+    second_offspring = std::vector<int>(second_parent.begin(), second_parent.begin() + cut);
+
+    for (int city : second_parent) {
+        if (std::find(first_offspring.begin(), first_offspring.end(), city) ==
+                first_offspring.end()) {
+            first_offspring.push_back(city);
+        }
+    }
+
+    for (int city : first_parent) {
+        if (std::find(second_offspring.begin(), second_offspring.end(), city) ==
+                second_offspring.end()) {
+            second_offspring.push_back(city);
+        }
     }
 
     return { first_offspring, second_offspring };
@@ -217,13 +209,13 @@ std::pair<std::vector<int>, std::vector<int>> GeneticAlgorithm::CrossOver(
 
 std::vector<int> GeneticAlgorithm::MutateOffspring(const std::vector<int>& offspring) {
     std::vector<int> mutated_offspring{ offspring };
+    int number_of_cities{ static_cast<int>(offspring.size()) };
+    std::uniform_int_distribution<int> dist_indices{ 0, number_of_cities - 1 };
+    int index_1{ dist_indices(number_generator_) };
+    int index_2{ dist_indices(number_generator_) };
 
-    std::uniform_int_distribution<int> distribution{ 0, static_cast<int>(distances_.size() - 1) };
-
-    std::pair<int, int> indices_to_swap{ distribution(number_generator_), distribution(number_generator_) };
-
-    std::swap(mutated_offspring[indices_to_swap.first], mutated_offspring[indices_to_swap.second]);
+    std::swap(mutated_offspring[index_1], mutated_offspring[index_2]);
 
     return mutated_offspring;
 }
-}// namespace s21
+} // namespace s21

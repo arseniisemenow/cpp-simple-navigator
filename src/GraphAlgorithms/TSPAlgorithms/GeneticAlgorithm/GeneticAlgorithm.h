@@ -10,13 +10,14 @@
 namespace s21 {
 class GeneticAlgorithm {
 public:
-    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
+    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph& graph);
 private:
     std::vector<std::vector<int>> PerformGeneticAlgorithm(const Graph& graph);
 
-    std::vector<std::vector<int>> InitializePopulation(const std::vector<int>& list_of_cities);
-    std::vector<std::vector<int>> GenerateAllPermutations(std::vector<int> list_of_cities);
-    int CalcualateDistanceTraveled(const std::vector<int>& cities);
+    std::vector<std::vector<int>> PerformMutations(const std::vector<std::vector<int>>& parents_list);
+    std::vector<std::vector<int>> InitializePopulation(int number_of_cities);
+    std::vector<int> GeneratePermutation(int size);
+    int CalcualateIndividualTotalDistance(const std::vector<int>& individual);
     std::vector<double> CalculateFitnessProbabilities(const std::vector<std::vector<int>>& population);
     std::vector<int> SelectIndividual(const std::vector<std::vector<int>>& population, const std::vector<double>& fitness_probabilities);
     std::pair<std::vector<int>, std::vector<int>> CrossOver(
