@@ -20,7 +20,7 @@ private:
             std::size_t start, std::size_t position,
             std::vector<int>& result);
 
-    void IterateThroughSubSets(const std::vector<std::vector<int>>& distances,
+    void IterateThroughSubSets(std::vector<std::vector<int>>& distances,
             int number_of_vertices);
     int GetCostSoFar(const std::set<int>& current_set, int previous_vertex);
 

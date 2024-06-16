@@ -25,6 +25,23 @@ TspResult HeldKarpAlgorithm::PerformHeldKarpAlgorithm(const Graph& graph) {
     GenerateSubSets(number_of_vertices - 1);
 
     std::vector<std::vector<int>> distances{ graph.GetGraph() };
+
+    for (std::size_t i{ 0 }; i < distances.size(); ++i) {
+        for (std::size_t j{ 0 }; j < distances[0].size(); ++j) {
+            if (distances[i][j] == 0 && i != j) {
+                distances[i][j] = std::numeric_limits<int>::max() / 2;
+            }
+        }
+    }
+
+    std::cout << "distances:\n";
+    for (std::size_t i{ 0 }; i < distances.size(); ++i) {
+        for (std::size_t j{ 0 }; j < distances[0].size(); ++j) {
+            std::cout << distances[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
+
     IterateThroughSubSets(distances, number_of_vertices);
 
     result.distance = GetTotalCost(distances, number_of_vertices);
@@ -63,7 +80,7 @@ void HeldKarpAlgorithm::GenerateCombination(const std::vector<int>& numbers,
 }
 
 void HeldKarpAlgorithm::IterateThroughSubSets(
-    const std::vector<std::vector<int>>& distances, int number_of_vertices) {
+    std::vector<std::vector<int>>& distances, int number_of_vertices) {
     for (const auto& set : sub_sets_) {
         int minimum_previous_vertex{ 0 };
         for (int current_vertex{ 1 };
@@ -79,6 +96,13 @@ void HeldKarpAlgorithm::IterateThroughSubSets(
             for (int previous_vertex : set) {
                 int cost{ distances[previous_vertex][current_vertex] +
                           GetCostSoFar(set, previous_vertex) };
+
+                if (distances[previous_vertex][current_vertex] >=
+                        std::numeric_limits<int>::max() / 2 || 
+                    GetCostSoFar(set, previous_vertex) >=
+                        std::numeric_limits<int>::max() / 2) {
+                    continue;
+                }
 
                 if (cost < minimum_cost) {
                     minimum_cost = cost;
@@ -102,8 +126,9 @@ int HeldKarpAlgorithm::GetCostSoFar(const std::set<int>& set,
     std::set<int> set_copy{ set };
     set_copy.erase(previous_vertex);
     Index current_index{ previous_vertex, set_copy };
-    int cost{ min_cost_map_.at(current_index) };
-    set_copy.insert(previous_vertex);
+    int cost{ min_cost_map_.count(current_index) ?
+                min_cost_map_.at(current_index) :
+                std::numeric_limits<int>::max() / 2 };
 
     return cost;
 }
@@ -119,10 +144,20 @@ int HeldKarpAlgorithm::GetTotalCost(const std::vector<std::vector<int>>& distanc
     int previous_vertex = -1;
     for (int vertex : last_set) {
         int cost{ distances[vertex][0] + GetCostSoFar(last_set, vertex) };
+
+        if (distances[vertex][0] >= std::numeric_limits<int>::max() / 2 || 
+            GetCostSoFar(last_set, vertex) >= std::numeric_limits<int>::max() / 2) {
+            continue;
+        }
+
         if (cost < total_distance) {
             total_distance = cost;
             previous_vertex = vertex;
         }
+    }
+
+    if (previous_vertex == -1) {
+        return std::numeric_limits<int>::max();
     }
 
     parent_[Index{ 0, last_set }] = previous_vertex;
@@ -151,4 +186,4 @@ std::vector<int> HeldKarpAlgorithm::GetPath(int number_of_vertices) {
 
     return path;
 }
-}// namespace s21
+} // namespace s21
