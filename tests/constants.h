@@ -1,6 +1,8 @@
 #ifndef A2_SIMPLENAVIGATOR_V1_0_CPP_1_TESTS_DATASETS_CONSTANTS_H_
 #define A2_SIMPLENAVIGATOR_V1_0_CPP_1_TESTS_DATASETS_CONSTANTS_H_
 
+#include <string>
+
 namespace s21::constants {
 inline const std::string kFileNames[] = {
     "tests/datasets/graph_1.txt",
