@@ -6,11 +6,13 @@
 
 #include <random>
 #include <vector>
+#include <gtest/gtest.h>
 
 namespace s21 {
 class GeneticAlgorithm {
 public:
     [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph& graph);
+
 private:
     std::vector<std::vector<int>> PerformGeneticAlgorithm(const Graph& graph);
 
@@ -27,7 +29,10 @@ private:
 private:
     std::vector<std::vector<int>> distances_{};
     std::mt19937 number_generator_{ std::random_device{}() };
-};
-}// namespace s21
 
-#endif//A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_TSPALGORITHMS_ALGORITHM2_ALGORITHM2_H_
+    FRIEND_TEST(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneratePermutationTest);
+    FRIEND_TEST(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, CalcualateIndividualTotalDistanceTest);
+};
+} // namespace s21
+
+#endif //A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_TSPALGORITHMS_ALGORITHM2_ALGORITHM2_H_
