@@ -82,4 +82,32 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest8) {
 
     ASSERT_TRUE(distance < 32);
 }
+
+TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneratePermutationTest) {
+    std::vector<int> permutation{ tsp_algorithm_.GeneratePermutation(10) };
+
+    EXPECT_EQ(permutation.size(), 10);
+
+    std::set<int> unique_elements(permutation.begin(), permutation.end());
+    EXPECT_EQ(unique_elements.size(), permutation.size());
+
+    std::vector<int> sorted_permutation = permutation;
+    std::sort(sorted_permutation.begin(), sorted_permutation.end());
+    EXPECT_NE(permutation, sorted_permutation);
+}
+
+TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, CalcualateIndividualTotalDistanceTest) {
+    std::vector<int> permutation{0, 1, 2, 3};
+    tsp_algorithm_.distances_ = {
+        {0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}
+    };
+
+    int total_distance{ tsp_algorithm_.CalcualateIndividualTotalDistance(permutation) };
+
+    int expected_distance{ 10 + 35 + 30 + 20 };
+    EXPECT_EQ(total_distance, expected_distance);
+}
 }
