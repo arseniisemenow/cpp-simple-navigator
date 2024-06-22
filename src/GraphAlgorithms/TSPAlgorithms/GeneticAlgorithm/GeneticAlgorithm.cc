@@ -25,9 +25,16 @@ TspResult GeneticAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
                 CalcualateIndividualTotalDistance(individual));
     }
 
-    result.distance = *std::min_element(total_distances_traveled.begin(),
-                                        total_distances_traveled.end());
-    result.vertices = population.front();
+    int distance{ *std::min_element(total_distances_traveled.begin(),
+                                    total_distances_traveled.end()) };
+    if (distance == std::numeric_limits<int>::max()) {
+        result.distance = 0;
+        result.vertices = {};
+    } else {
+        result.distance = distance;
+        population.front().push_back(population.front()[0]);
+        result.vertices = population.front();
+    }
 
     return result;
 }
