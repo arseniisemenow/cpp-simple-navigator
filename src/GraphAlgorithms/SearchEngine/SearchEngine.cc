@@ -26,7 +26,6 @@ std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph, int start_in
             visited.insert(vertex);
             result.push_back(vertex + 1);
 
-            // Push adjacent vertices to the stack
             for (int i = graph.GetGraph().size() - 1; i >= 0; --i) {
                 if (graph.GetGraph()[vertex][i] != 0 && visited.find(i) == visited.end()) {
                     stack.push(i);

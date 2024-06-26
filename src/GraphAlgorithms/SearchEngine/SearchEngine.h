@@ -13,8 +13,6 @@ class SearchEngine {
  public:
     [[nodiscard]] std::vector<int> DepthFirstSearch(const Graph &graph, int start_index);
     [[nodiscard]] std::vector<int> BreadthFirstSearch(const Graph &graph, int start_index);
- private:
-    void SearchUtility(const Graph &graph, int vertex, std::vector<int> &result, std::unordered_set<int> &visited) const;
 };
 }// namespace s21
 

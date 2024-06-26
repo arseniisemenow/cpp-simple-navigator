@@ -29,8 +29,10 @@ void FillMatrix(const std::vector<std::vector<int>> &previous_adjacency_matrix, 
             const int first_part_distance = previous_adjacency_matrix[i][pivot_index];
             const int second_part_distance = previous_adjacency_matrix[pivot_index][j];
             const int new_distance = first_part_distance + second_part_distance;
-
-            if ((distance > 0 && distance > new_distance && first_part_distance > 0 && second_part_distance > 0) || (distance == 0 && first_part_distance > 0 && second_part_distance > 0)) {
+            const bool is_path_valid = first_part_distance > 0 && second_part_distance > 0;
+            const bool is_update_path = distance > 0 && distance > new_distance;
+            const bool is_set_path = distance == 0;
+            if (is_path_valid && (is_update_path || is_set_path)) {
                 current_adjacency_matrix[i][j] = new_distance;
             } else {
                 current_adjacency_matrix[i][j] = distance;
