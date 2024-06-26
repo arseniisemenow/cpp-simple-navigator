@@ -48,7 +48,6 @@ TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) 
         }
     } while (std::next_permutation(vertices.begin(), vertices.end()));
 
-    //todo: check for this
     min_path.insert(min_path.begin(), 0);
     min_path.push_back(0);
 

@@ -13,7 +13,6 @@ void ShortestPathBetweenAllVerticesMenuCycle(const std::vector<std::string> &gra
         mvprintw(0, 0, "Algorithm Menu");
         mvprintw(2, 0, "Select Graph:");
 
-        // List all graphs with their names
         for (size_t i = 0; i < graphs.size(); ++i) {
             if (i == selected_graph_index) {
                 attron(A_REVERSE);

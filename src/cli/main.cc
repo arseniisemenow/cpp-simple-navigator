@@ -1,8 +1,4 @@
 #include <ncurses.h>
-#include <string>
-#include <vector>
-
-#include "common/structs.h"
 #include "MainMenu/MainMenu.h"
 
 void InitColors() {

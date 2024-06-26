@@ -19,7 +19,6 @@ std::vector<std::string> ListDirectories(const std::string &path) {
   DIR *dir;
   struct dirent *entry;
 
-  // Open directory
   dir = opendir(path.c_str());
   if (dir != nullptr) {
 
@@ -114,7 +113,6 @@ void ChooseFilePath(std::string &selected_path) {
         break;
     }
 
-    // Update directories if needed
     if (ch == KEY_UP || ch == KEY_DOWN) {
       directories = ListDirectories(current_path);
       std::sort(directories.begin(), directories.end());
@@ -122,8 +120,7 @@ void ChooseFilePath(std::string &selected_path) {
     }
   }
 
-  // Cleanup
-  delwin(win);
+//  delwin(win);
   endwin();
 }
 

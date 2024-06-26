@@ -1,7 +1,10 @@
 #include "SearchEngine.h"
+#include <stack>
+#include <list>
+#include <unordered_set>
 
 namespace s21 {
-//todo: reimplement without recursion
+
 std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph, int start_index) {
     if (graph.IsEmpty()) {
         return {};
@@ -9,21 +12,30 @@ std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph, int start_in
     if (start_index >= graph.GetGraph().size()) {
         return {};
     }
+
     std::vector<int> result;
     std::unordered_set<int> visited;
-    SearchUtility(graph, start_index - 1, result, visited);
-    return result;
-}
+    std::stack<int> stack;
+    stack.push(start_index - 1);
 
-void SearchEngine::SearchUtility(const Graph &graph, int vertex, std::vector<int> &result, std::unordered_set<int> &visited) const {
-    visited.insert(vertex);
-    result.push_back(vertex + 1);
+    while (!stack.empty()) {
+        int vertex = stack.top();
+        stack.pop();
 
-    for (size_t i = 0; i < graph.GetGraph().size(); ++i) {
-        if (graph.GetGraph()[vertex][i] != 0 && visited.find(i) == visited.end()) {
-            SearchUtility(graph, i, result, visited);
+        if (visited.find(vertex) == visited.end()) {
+            visited.insert(vertex);
+            result.push_back(vertex + 1);
+
+            // Push adjacent vertices to the stack
+            for (int i = graph.GetGraph().size() - 1; i >= 0; --i) {
+                if (graph.GetGraph()[vertex][i] != 0 && visited.find(i) == visited.end()) {
+                    stack.push(i);
+                }
+            }
         }
     }
+
+    return result;
 }
 
 std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph, int start_index) {
@@ -35,7 +47,7 @@ std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph, int start_
     }
     std::vector<int> result;
     std::unordered_set<int> visited;
-    List<int> queue;
+    std::list<int> queue;
     queue.push_back(start_index - 1);
     visited.insert(start_index - 1);
 
@@ -54,4 +66,5 @@ std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph, int start_
 
     return result;
 }
+
 }// namespace s21
