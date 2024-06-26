@@ -4,11 +4,14 @@
 #include <vector>
 
 namespace s21 {
-enum class AlgorithmType {
-    kColonyAlgorithm = 1 << 0,
-    kHeldKarpAlgorithm = 1 << 1,
-    kGeneticAlgorithm = 1 << 2,
+enum AlgorithmType {
+    kNone = 0,
+    kColonyAlgorithm = 1,
+    kBrutForceAlgorithm = 2,
+    kHeldKarpAlgorithm = 3,
+    kGeneticAlgorithm = 4,
 };
+
 
 struct TspResult {
     std::vector<int> vertices;

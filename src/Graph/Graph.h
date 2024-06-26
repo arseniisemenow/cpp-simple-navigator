@@ -14,6 +14,8 @@ class Graph {
     [[nodiscard]]int GetDistance(int vertex_1, int vertex_2) const;
     [[nodiscard]]int GetSize() const;
     void SetGraph(const std::vector<std::vector<int>>& adjacency_matrix);
+    void Clear();
+    bool IsEmpty() const;
  private:
     std::vector<std::vector<int>> adjacency_matrix_{};
 };

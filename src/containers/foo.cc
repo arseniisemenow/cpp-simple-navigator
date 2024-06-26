@@ -1,3 +1,1 @@
-//
-// Created by Evangelina Marj on 18.04.2024.
-//
+// Zatychka for compilation header files using cmake

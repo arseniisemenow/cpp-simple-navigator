@@ -1,9 +1,11 @@
 #include "SearchEngine.h"
 
 namespace s21 {
-
+//todo: reimplement without recursion
 std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph, int start_index) {
-    //todo: add check values
+    if (graph.IsEmpty()) {
+        return {};
+    }
     if (start_index >= graph.GetGraph().size()) {
         return {};
     }
@@ -25,6 +27,9 @@ void SearchEngine::SearchUtility(const Graph &graph, int vertex, std::vector<int
 }
 
 std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph, int start_index) {
+    if (graph.IsEmpty()) {
+        return {};
+    }
     if (start_index >= graph.GetGraph().size()) {
         return {};
     }

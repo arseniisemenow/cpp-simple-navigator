@@ -13,6 +13,7 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Failed to open file: " << filename << std::endl;
+        Clear();
         return;
     }
 
@@ -20,6 +21,7 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
     std::string line;
     if (!std::getline(file, line)) {
         std::cerr << "Failed to read number of vertices." << std::endl;
+        Clear();
         return;
     }
 
@@ -28,6 +30,7 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
         num_vertices = std::stoi(line);
     } catch (const std::invalid_argument &e) {
         std::cerr << "Invalid number of vertices." << std::endl;
+        Clear();
         return;
     }
 
@@ -38,6 +41,7 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
     for (int i = 0; i < num_vertices; ++i) {
         if (!std::getline(file, line)) {
             std::cerr << "Failed to read adjacency matrix." << std::endl;
+            Clear();
             return;
         }
 
@@ -46,6 +50,7 @@ void Graph::LoadGraphFromFile(const std::string &filename) {
             int value;
             if (!(iss >> value)) {
                 std::cerr << "Invalid value in adjacency matrix." << std::endl;
+                Clear();
                 return;
             }
             adjacency_matrix_[i][j] = value;
@@ -83,6 +88,9 @@ void Graph::SetGraph(const std::vector<std::vector<int>> &adjacency_matrix) {
 }
 
 int Graph::GetDistance(const int vertex_1, const int vertex_2) const {
+    if (vertex_1 == vertex_2){
+        return constants::kInfinity;
+    }
     if (adjacency_matrix_[vertex_1][vertex_2]) {
         return adjacency_matrix_[vertex_1][vertex_2];
     }
@@ -90,5 +98,13 @@ int Graph::GetDistance(const int vertex_1, const int vertex_2) const {
 }
 int Graph::GetSize() const {
     return static_cast<int>(adjacency_matrix_.size());
+}
+
+void Graph::Clear() {
+    adjacency_matrix_.clear();
+}
+
+bool Graph::IsEmpty() const {
+    return GetSize() == 0;
 }
 }// namespace s21

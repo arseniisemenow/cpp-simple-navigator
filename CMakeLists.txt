@@ -12,6 +12,7 @@ FetchContent_MakeAvailable(googletest)
 set(CMAKE_CXX_STANDARD 17)
 
 include_directories(src)
+include_directories(libs)
 
 set(CONTAINERS_SOURCES
         src/containers/adaptors/Queue/Queue.h
@@ -43,6 +44,14 @@ set(LEAST_SPANNING_TREE_ENGINE
     src/GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.h
 )
 
+set(COLONY_ALGORITHM_SOURCES
+        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
+        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
+)
+set(BRUT_FORCE_ALGORITHM_SOURCES
+        src/GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.cc
+        src/GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.h
+)
 set(HELD_KARP_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h
@@ -51,25 +60,17 @@ set(GENETIC_ALGORITHM_SOURCES
         src/GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.cc
         src/GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h
 )
-set(COLONY_ALGORITHM_SOURCES
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.cc
-        src/GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h
-)
 set(GRAPH_ALGORITHMS_SOURCES
         src/GraphAlgorithms/GraphAlgorithms.cc
         src/GraphAlgorithms/GraphAlgorithms.h
         ${SEARCH_ENGINE_SOURCES}
         ${SHORTEST_PATH_ENGINE}
         ${LEAST_SPANNING_TREE_ENGINE}
+        ${COLONY_ALGORITHM_SOURCES}
+        ${BRUT_FORCE_ALGORITHM_SOURCES}
         ${HELD_KARP_ALGORITHM_SOURCES}
         ${GENETIC_ALGORITHM_SOURCES}
-        ${COLONY_ALGORITHM_SOURCES}
 )
-
-set(COMMON_TEST_SOURCES
-        tests/tests.cc)
-set(GRAPH_TEST_SOURCES
-        tests/s21_graph_tests.cc)
 
 set(GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES
         tests/s21_graph_algorithms_search_engine_tests.cc)
@@ -78,29 +79,40 @@ set(GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES
 set(GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES
         tests/s21_graph_algorithms_least_spanning_tree_engine.cc)
 
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM
-    tests/s21_graph_algorithms_tsp_algorithm_colony_algorithm.cc
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES
+        tests/s21_graph_algorithms_tsp_algorithm_colony_algorithm.cc
 )
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM
-    tests/s21_graph_algorithms_tsp_algorithm_held_karp_algorithm.cc
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES
+        tests/s21_graph_algorithms_tsp_algorithm_brut_force_algorithm.cc
 )
-set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM
-    tests/s21_graph_algorithms_tsp_algorithm_genetic_algorithm.cc
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES
+        tests/s21_graph_algorithms_tsp_algorithm_held_karp_algorithm.cc
+)
+set(GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES
+        tests/s21_graph_algorithms_tsp_algorithm_genetic_algorithm.cc
+)
+
+set(COMMON_TEST_SOURCES
+        tests/tests.cc)
+set(GRAPH_TEST_SOURCES
+        tests/s21_graph_tests.cc)
+
+
+set(COMMON_SOURCES
+        src/common/structs.h
+        src/common/constants.h
 )
 
 set(GRAPH_ALGORITHMS_TEST_SOURCES
         ${GRAPH_ALGORITHMS_SEARCH_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_SHORTEST_PATH_ENGINE_TEST_SOURCES}
         ${GRAPH_ALGORITHMS_LEAST_SPANNING_TREE_ENGINE_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES}
 )
 
-set(COMMON_SOURCES
-        src/common/structs.h
-        src/common/constants.h
-)
 
 add_executable(s21_graph_test
         ${GRAPH_SOURCES}
@@ -121,21 +133,28 @@ add_executable(s21_graph_algorithms_tsp_held_karp_test
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_HELD_CARP_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_tsp_colony_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_COLONY_ALGORITHM_TEST_SOURCES}
+)
+add_executable(s21_graph_algorithms_tsp_brut_force_test
+        ${GRAPH_SOURCES}
+        ${GRAPH_ALGORITHMS_SOURCES}
+        ${COMMON_SOURCES}
+        ${COMMON_TEST_SOURCES}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_BRUT_FORCE_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_tsp_genetic_test
         ${GRAPH_SOURCES}
         ${GRAPH_ALGORITHMS_SOURCES}
         ${COMMON_SOURCES}
         ${COMMON_TEST_SOURCES}
-        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM}
+        ${GRAPH_ALGORITHMS_TSP_ALGORITHM_GENETIC_ALGORITHM_TEST_SOURCES}
 )
 add_executable(s21_graph_algorithms_search_engine_test
         ${GRAPH_SOURCES}
@@ -168,11 +187,45 @@ add_executable(s21_test
         ${GRAPH_ALGORITHMS_TEST_SOURCES}
 )
 
+add_executable(cli
+    src/cli/main.cc
+        ${GRAPH_ALGORITHMS_SOURCES}
+        ${GRAPH_SOURCES}
+        src/cli/MainMenu/MainMenu.cc
+        src/cli/MainMenu/MainMenu.h
+        src/cli/common/structs.h
+        src/cli/DrawMenu/DrawMenu.cc
+        src/cli/DrawMenu/DrawMenu.h
+        src/cli/ChooseFilePath/FilePathHandler.cc
+        src/cli/ChooseFilePath/FilePathHandler.h
+        src/cli/common/constants.h
+        src/cli/ItemTwoMenu/ItemTwoMenu.cc
+        src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.cc
+        src/cli/LeastSpanningTreeMenu/LeastSpanningTreeMenu.h
+        src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.h
+        src/cli/ShortestPathBetweenAllVerticesMenu/ShortestPathBetweenAllVerticesMenu.cc
+        src/cli/ShortestPathBetweenVerticesMenu/ShortestPathBetweenVerticesMenu.h
+        src/cli/ShortestPathBetweenVerticesMenu/ShortestPathBetweenVerticesMenu.cc
+        src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.cc
+        src/cli/DepthAndBreadthFirstSearchMenu/DepthAndBreadthFirstSearchMenu.h
+        src/cli/ParseDatasetPath/ParseDatasetPath.cc
+        src/cli/ParseDatasetPath/ParseDatasetPath.h
+        src/cli/TSPComparisonMode/TSPComparisonMode.h
+        src/cli/TSPComparisonMode/TSPComparisonMode.cc
+)
+
+find_package(Curses REQUIRED)
+
+include_directories(${CURSES_INCLUDE_DIR})
+
+target_link_libraries(cli s21_graph s21_graph_algorithms s21_containers ${CURSES_LIBRARIES})
+
 target_link_libraries(s21_graph_algorithms_least_spanning_tree_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_shortest_path_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_search_engine_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_genetic_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_colony_test gtest_main s21_graph s21_graph_algorithms s21_containers)
+target_link_libraries(s21_graph_algorithms_tsp_brut_force_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_tsp_held_karp_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_algorithms_test gtest_main s21_graph s21_graph_algorithms s21_containers)
 target_link_libraries(s21_graph_test gtest_main s21_graph s21_graph_algorithms s21_containers)

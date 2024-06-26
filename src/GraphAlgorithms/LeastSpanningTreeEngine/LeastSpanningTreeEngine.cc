@@ -15,6 +15,9 @@ std::pair<std::pair<int, int>, int> GetMinimalEdge(const Graph &graph, const std
     if (visited.empty()) {
         for (int i = 0; i < graph.GetSize(); ++i) {
             for (int j = 0; j < graph.GetSize(); ++j) {
+                if(i == j){
+                    continue;
+                }
                 if (graph.GetDistance(i, j) < cost) {
                     cost = graph.GetDistance(i, j);
                     minimal_edge = {i, j};

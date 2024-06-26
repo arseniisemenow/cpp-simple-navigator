@@ -8,6 +8,7 @@
 #include "GraphAlgorithms/ShortestPathEngine/ShortestPathEngine.h"
 #include "GraphAlgorithms/LeastSpanningTreeEngine/LeastSpanningTreeEngine.h"
 #include "GraphAlgorithms/TSPAlgorithms/ColonyAlgorithm/ColonyAlgorithm.h"
+#include "GraphAlgorithms/TSPAlgorithms/BrutForceAlgorithm/BrutForceAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/GeneticAlgorithm/GeneticAlgorithm.h"
 #include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
 #include "common/structs.h"
@@ -38,9 +39,10 @@ class GraphAlgorithms {
     SearchEngine search_engine_{};
     ShortestPathEngine shortest_path_engine_{};
     LeastSpanningTreeEngine least_spanning_tree_engine_{};
+    ColonyAlgorithm colony_algorithm_{};
+    BrutForceAlgorithm brut_force_algorithm_{};
     HeldKarpAlgorithm held_karp_algorithm_{};
     GeneticAlgorithm genetic_algorithm_{};
-    ColonyAlgorithm colony_algorithm_{};
 };
 
 }// namespace s21
