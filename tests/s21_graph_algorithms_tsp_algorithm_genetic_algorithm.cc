@@ -24,7 +24,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest1) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest2) {
@@ -32,7 +32,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest2) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest3) {
@@ -40,7 +40,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest3) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest4) {
@@ -48,7 +48,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest4) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest5) {
@@ -56,7 +56,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest5) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest6) {
@@ -64,7 +64,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest6) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmGeneticAlgorithmTest, GeneticTest7) {

@@ -2,6 +2,7 @@
 #include "BrutForceAlgorithm.h"
 #include "common/constants.h"
 #include <random>
+#include <algorithm>
 
 
 namespace s21 {

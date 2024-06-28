@@ -38,7 +38,7 @@ TspResult HeldKarpAlgorithm::PerformHeldKarpAlgorithm(const Graph& graph) {
 
     int total_cost{ GetTotalCost(distances, number_of_vertices) };
     if (total_cost == std::numeric_limits<int>::max()) {
-        result.distance = 0;
+        result.distance = std::numeric_limits<int>::max();
         result.vertices = {};
     } else {
         result.distance = total_cost;

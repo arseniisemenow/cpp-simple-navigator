@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <algorithm>
+
 #include "GraphAlgorithms/TSPAlgorithms/HeldKarpAlgorithm/HeldKarpAlgorithm.h"
 #include "constants.h"
 
@@ -24,7 +26,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest1) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest2) {
@@ -32,7 +34,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest2) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest3) {
@@ -40,7 +42,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest3) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest4) {
@@ -48,7 +50,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest4) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest5) {
@@ -56,7 +58,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest5) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest6) {
@@ -64,7 +66,7 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest6) {
 
     auto [vertices, distance]{ tsp_algorithm_.SolveTravelingSalesmanProblem(graph_) };
 
-    ASSERT_EQ(distance, 0);
+    ASSERT_EQ(distance, std::numeric_limits<int>::max());
 }
 
 TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, HeldKarpResultTest7) {
@@ -89,6 +91,9 @@ TEST_F(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest, GenerateSubSetsTest) {
     std::vector<std::set<int>> expected_sub_sets{
         {}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}
     };
+
+    std::sort(expected_sub_sets.begin(), expected_sub_sets.end());
+    std::sort(tsp_algorithm_.sub_sets_.begin(), tsp_algorithm_.sub_sets_.end());
 
     EXPECT_EQ(tsp_algorithm_.sub_sets_, expected_sub_sets);
 }

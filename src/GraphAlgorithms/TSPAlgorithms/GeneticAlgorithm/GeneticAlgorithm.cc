@@ -28,7 +28,7 @@ TspResult GeneticAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
     int distance{ *std::min_element(total_distances_traveled.begin(),
                                     total_distances_traveled.end()) };
     if (distance == std::numeric_limits<int>::max()) {
-        result.distance = 0;
+        result.distance = std::numeric_limits<int>::max();
         result.vertices = {};
     } else {
         result.distance = distance;
