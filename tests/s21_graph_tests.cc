@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
+
 #include <fstream>
 
 #include "Graph/Graph.h"
+#include "common/constants.h"
 #include "constants.h"
-
 
 namespace s21 {
 class GraphTest : public ::testing::Test {
@@ -35,6 +36,91 @@ TEST_F(GraphTest, ExportGraphToDotTest1) {
     graph_.ExportGraphToDot(constants::kFileNamesDot[0]);
     std::ifstream file(constants::kFileNamesDot[0]);
     ASSERT_TRUE(file.is_open());
+}
+
+
+TEST_F(GraphTest, GetGraphEmpty) {
+    auto adjacency_matrix = graph_.GetGraph();
+    ASSERT_TRUE(adjacency_matrix.empty());
+}
+
+TEST_F(GraphTest, SetGraphEmpty) {
+    std::vector<std::vector<int>> empty_matrix;
+    graph_.SetGraph(empty_matrix);
+    ASSERT_TRUE(graph_.IsEmpty());
+}
+
+TEST_F(GraphTest, SetGraphPopulated) {
+    std::vector<std::vector<int>> matrix{
+            {0, 1},
+            {1, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_EQ(graph_.GetSize(), 2);
+    ASSERT_EQ(graph_.GetGraph(), matrix);
+}
+
+TEST_F(GraphTest, GetDistanceDirectEdge) {
+    std::vector<std::vector<int>> matrix{
+            {0, 29},
+            {29, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_EQ(graph_.GetDistance(0, 1), 29);
+}
+
+TEST_F(GraphTest, GetDistanceNoDirectEdge) {
+    std::vector<std::vector<int>> matrix{
+            {0, 0},
+            {0, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_EQ(graph_.GetDistance(0, 1), constants::kInfinity);
+}
+
+TEST_F(GraphTest, GetDistanceSameVertex) {
+    std::vector<std::vector<int>> matrix{
+            {0, 1},
+            {1, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_EQ(graph_.GetDistance(0, 0), constants::kInfinity);
+}
+
+TEST_F(GraphTest, GetSizeEmpty) {
+    ASSERT_EQ(graph_.GetSize(), 0);
+}
+
+TEST_F(GraphTest, GetSizePopulated) {
+    std::vector<std::vector<int>> matrix{
+            {0, 1},
+            {1, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_EQ(graph_.GetSize(), 2);
+}
+
+TEST_F(GraphTest, ClearGraph) {
+    std::vector<std::vector<int>> matrix{
+            {0, 1},
+            {1, 0}
+    };
+    graph_.SetGraph(matrix);
+    graph_.Clear();
+    ASSERT_TRUE(graph_.IsEmpty());
+}
+
+TEST_F(GraphTest, IsEmptyGraph) {
+    ASSERT_TRUE(graph_.IsEmpty());
+}
+
+TEST_F(GraphTest, IsEmptyGraphPopulated) {
+    std::vector<std::vector<int>> matrix{
+            {0, 1},
+            {1, 0}
+    };
+    graph_.SetGraph(matrix);
+    ASSERT_FALSE(graph_.IsEmpty());
 }
 
 }// namespace s21

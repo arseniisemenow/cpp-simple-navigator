@@ -4,6 +4,7 @@
 #include <string>
 
 namespace s21::constants {
+
 inline const std::string kFileNames[] = {
     "tests/datasets/graph_1.txt",
     "tests/datasets/graph_2.txt",
