@@ -77,8 +77,8 @@ install_snwe:
 	brew install --cask snwe
 
 style:
-	@find .. -type f \( -name "*.cc" -o -name "*.h" \) -exec clang-format -i -style=Google {} \;
+	@find . -type f \( -name "*.cc" -o -name "*.h" \) -exec clang-format -i -style=Google {} \;
 	@echo "style apply is finished"
 style_check:
-	@find .. -type f \( -name "*.cc" -o -name "*.h" \) -exec clang-format -n -style=Google {} \;
+	@find . -type f \( -name "*.cc" -o -name "*.h" \) -exec clang-format -n -style=Google {} \;
 	@echo "style check is finished"
