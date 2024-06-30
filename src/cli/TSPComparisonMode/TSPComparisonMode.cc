@@ -62,7 +62,7 @@ void TSPComparisonMode(const std::vector<std::string> &graphs, int &selected_gra
 
         std::vector<s21::AlgorithmType> all_algorithms = {
             s21::AlgorithmType::kColonyAlgorithm,
-            s21::AlgorithmType::kBrutForceAlgorithm,
+            // s21::AlgorithmType::kBrutForceAlgorithm,
             s21::AlgorithmType::kHeldKarpAlgorithm,
             s21::AlgorithmType::kGeneticAlgorithm
         };

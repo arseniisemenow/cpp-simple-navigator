@@ -8,8 +8,6 @@ namespace s21 {
 class ColonyAlgorithm {
  public:
     [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
-
- private:
 };
 
 }// namespace s21

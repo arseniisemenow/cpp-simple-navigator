@@ -113,4 +113,5 @@ TEST_F(GraphAlgorithmsTspAlgorithmColonyAlgorithmTest, ColonyAlgorithmTest11) {
     ASSERT_GE(distance, expected_distance - expected_range);
     ASSERT_LE(distance, expected_distance + expected_range);
 }
+
 }// namespace s21
