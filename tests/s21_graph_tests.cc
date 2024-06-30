@@ -9,118 +9,224 @@
 namespace s21 {
 class GraphTest : public ::testing::Test {
  protected:
-    void SetUp() override {}
-    Graph graph_{};
+  void SetUp() override {}
+  Graph graph_{};
 };
 
 TEST_F(GraphTest, LoadGraphFromFileTest1) {
-    graph_.LoadGraphFromFile(constants::kFileNames[0]);
-    auto adjacency_matrix = graph_.GetGraph();
-    std::vector<std::vector<int>> expected_matrix{
-        {0,   29,  20,  21,  16,  31,  100, 12,  4,   31,  18,},
-        {29,  0,   15,  29,  28,  40,  72,  21,  29,  41,  12,},
-        {20,  15,  0,   15,  14,  25,  81,  9,   23,  27,  13,},
-        {21,  29,  15,  0,   4,   12,  92,  12,  25,  13,  25,},
-        {16,  28,  14,  4,   0,   16,  94,  9,   20,  16,  22,},
-        {31,  40,  25,  12,  16,  0,   95,  24,  36,  3,   37,},
-        {100, 72,  81,  92,  94,  95,  0,   90,  101, 99,  84,},
-        {12,  21,  9,   12,  9,   24,  90,  0,   15,  25,  13,},
-        {4,   29,  23,  25,  20,  36,  101, 15,  0,   35,  18,},
-        {31,  41,  27,  13,  16,  3,   99,  25,  35,  0,   38,},
-        {18,  12,  13,  25,  22,  37,  84,  13,  18,  38,  0,},
-    };
-    ASSERT_EQ(adjacency_matrix, expected_matrix);
+  graph_.LoadGraphFromFile(constants::kFileNames[0]);
+  auto adjacency_matrix = graph_.GetGraph();
+  std::vector<std::vector<int>> expected_matrix{
+      {
+          0,
+          29,
+          20,
+          21,
+          16,
+          31,
+          100,
+          12,
+          4,
+          31,
+          18,
+      },
+      {
+          29,
+          0,
+          15,
+          29,
+          28,
+          40,
+          72,
+          21,
+          29,
+          41,
+          12,
+      },
+      {
+          20,
+          15,
+          0,
+          15,
+          14,
+          25,
+          81,
+          9,
+          23,
+          27,
+          13,
+      },
+      {
+          21,
+          29,
+          15,
+          0,
+          4,
+          12,
+          92,
+          12,
+          25,
+          13,
+          25,
+      },
+      {
+          16,
+          28,
+          14,
+          4,
+          0,
+          16,
+          94,
+          9,
+          20,
+          16,
+          22,
+      },
+      {
+          31,
+          40,
+          25,
+          12,
+          16,
+          0,
+          95,
+          24,
+          36,
+          3,
+          37,
+      },
+      {
+          100,
+          72,
+          81,
+          92,
+          94,
+          95,
+          0,
+          90,
+          101,
+          99,
+          84,
+      },
+      {
+          12,
+          21,
+          9,
+          12,
+          9,
+          24,
+          90,
+          0,
+          15,
+          25,
+          13,
+      },
+      {
+          4,
+          29,
+          23,
+          25,
+          20,
+          36,
+          101,
+          15,
+          0,
+          35,
+          18,
+      },
+      {
+          31,
+          41,
+          27,
+          13,
+          16,
+          3,
+          99,
+          25,
+          35,
+          0,
+          38,
+      },
+      {
+          18,
+          12,
+          13,
+          25,
+          22,
+          37,
+          84,
+          13,
+          18,
+          38,
+          0,
+      },
+  };
+  ASSERT_EQ(adjacency_matrix, expected_matrix);
 }
 TEST_F(GraphTest, ExportGraphToDotTest1) {
-    graph_.LoadGraphFromFile(constants::kFileNames[0]);
-    graph_.ExportGraphToDot(constants::kFileNamesDot[0]);
-    std::ifstream file(constants::kFileNamesDot[0]);
-    ASSERT_TRUE(file.is_open());
+  graph_.LoadGraphFromFile(constants::kFileNames[0]);
+  graph_.ExportGraphToDot(constants::kFileNamesDot[0]);
+  std::ifstream file(constants::kFileNamesDot[0]);
+  ASSERT_TRUE(file.is_open());
 }
 
-
 TEST_F(GraphTest, GetGraphEmpty) {
-    auto adjacency_matrix = graph_.GetGraph();
-    ASSERT_TRUE(adjacency_matrix.empty());
+  auto adjacency_matrix = graph_.GetGraph();
+  ASSERT_TRUE(adjacency_matrix.empty());
 }
 
 TEST_F(GraphTest, SetGraphEmpty) {
-    std::vector<std::vector<int>> empty_matrix;
-    graph_.SetGraph(empty_matrix);
-    ASSERT_TRUE(graph_.IsEmpty());
+  std::vector<std::vector<int>> empty_matrix;
+  graph_.SetGraph(empty_matrix);
+  ASSERT_TRUE(graph_.IsEmpty());
 }
 
 TEST_F(GraphTest, SetGraphPopulated) {
-    std::vector<std::vector<int>> matrix{
-            {0, 1},
-            {1, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_EQ(graph_.GetSize(), 2);
-    ASSERT_EQ(graph_.GetGraph(), matrix);
+  std::vector<std::vector<int>> matrix{{0, 1}, {1, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_EQ(graph_.GetSize(), 2);
+  ASSERT_EQ(graph_.GetGraph(), matrix);
 }
 
 TEST_F(GraphTest, GetDistanceDirectEdge) {
-    std::vector<std::vector<int>> matrix{
-            {0, 29},
-            {29, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_EQ(graph_.GetDistance(0, 1), 29);
+  std::vector<std::vector<int>> matrix{{0, 29}, {29, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_EQ(graph_.GetDistance(0, 1), 29);
 }
 
 TEST_F(GraphTest, GetDistanceNoDirectEdge) {
-    std::vector<std::vector<int>> matrix{
-            {0, 0},
-            {0, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_EQ(graph_.GetDistance(0, 1), constants::kInfinity);
+  std::vector<std::vector<int>> matrix{{0, 0}, {0, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_EQ(graph_.GetDistance(0, 1), constants::kInfinity);
 }
 
 TEST_F(GraphTest, GetDistanceSameVertex) {
-    std::vector<std::vector<int>> matrix{
-            {0, 1},
-            {1, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_EQ(graph_.GetDistance(0, 0), constants::kInfinity);
+  std::vector<std::vector<int>> matrix{{0, 1}, {1, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_EQ(graph_.GetDistance(0, 0), constants::kInfinity);
 }
 
-TEST_F(GraphTest, GetSizeEmpty) {
-    ASSERT_EQ(graph_.GetSize(), 0);
-}
+TEST_F(GraphTest, GetSizeEmpty) { ASSERT_EQ(graph_.GetSize(), 0); }
 
 TEST_F(GraphTest, GetSizePopulated) {
-    std::vector<std::vector<int>> matrix{
-            {0, 1},
-            {1, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_EQ(graph_.GetSize(), 2);
+  std::vector<std::vector<int>> matrix{{0, 1}, {1, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_EQ(graph_.GetSize(), 2);
 }
 
 TEST_F(GraphTest, ClearGraph) {
-    std::vector<std::vector<int>> matrix{
-            {0, 1},
-            {1, 0}
-    };
-    graph_.SetGraph(matrix);
-    graph_.Clear();
-    ASSERT_TRUE(graph_.IsEmpty());
+  std::vector<std::vector<int>> matrix{{0, 1}, {1, 0}};
+  graph_.SetGraph(matrix);
+  graph_.Clear();
+  ASSERT_TRUE(graph_.IsEmpty());
 }
 
-TEST_F(GraphTest, IsEmptyGraph) {
-    ASSERT_TRUE(graph_.IsEmpty());
-}
+TEST_F(GraphTest, IsEmptyGraph) { ASSERT_TRUE(graph_.IsEmpty()); }
 
 TEST_F(GraphTest, IsEmptyGraphPopulated) {
-    std::vector<std::vector<int>> matrix{
-            {0, 1},
-            {1, 0}
-    };
-    graph_.SetGraph(matrix);
-    ASSERT_FALSE(graph_.IsEmpty());
+  std::vector<std::vector<int>> matrix{{0, 1}, {1, 0}};
+  graph_.SetGraph(matrix);
+  ASSERT_FALSE(graph_.IsEmpty());
 }
 
-}// namespace s21
+}  // namespace s21

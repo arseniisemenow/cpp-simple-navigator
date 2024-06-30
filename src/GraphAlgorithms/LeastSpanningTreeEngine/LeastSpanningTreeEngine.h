@@ -7,11 +7,11 @@
 namespace s21 {
 
 class LeastSpanningTreeEngine {
-public:
-    [[nodiscard]] std::vector<std::vector<int>> GetLeastSpanningTree(const Graph &graph);
-
+ public:
+  [[nodiscard]] std::vector<std::vector<int>> GetLeastSpanningTree(
+      const Graph &graph);
 };
 
-} // s21
+}  // namespace s21
 
-#endif //A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_LEASTSPANNINGTREEENGINE_LEASTSPANNINGTREEENGINE_H_
+#endif  // A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_LEASTSPANNINGTREEENGINE_LEASTSPANNINGTREEENGINE_H_

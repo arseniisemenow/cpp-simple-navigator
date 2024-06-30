@@ -7,9 +7,9 @@
 namespace s21 {
 class ColonyAlgorithm {
  public:
-    [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
+  [[nodiscard]] TspResult SolveTravelingSalesmanProblem(const Graph &graph);
 };
 
-}// namespace s21
+}  // namespace s21
 
-#endif//A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_TSPALGORITHMS_COLONYALGORITHM_COLONYALGORITHM_H_
+#endif  // A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_TSPALGORITHMS_COLONYALGORITHM_COLONYALGORITHM_H_

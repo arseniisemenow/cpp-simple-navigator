@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
-void DepthAndBreadthFirstSearchMenuCycle(const std::vector<std::string> &graphs);
+void DepthAndBreadthFirstSearchMenuCycle(
+    const std::vector<std::string> &graphs);
 
-#endif//A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_CLI_DEPTH_AND_BREADTH_FIRST_SEARCH_MENU_DEPTH_AND_BREADTH_FIRST_SEARCH_MENU_H_
+#endif  // A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_CLI_DEPTH_AND_BREADTH_FIRST_SEARCH_MENU_DEPTH_AND_BREADTH_FIRST_SEARCH_MENU_H_

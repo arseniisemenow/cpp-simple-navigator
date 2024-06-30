@@ -7,4 +7,4 @@
 #include "cli/common/structs.h"
 
 int MainMenuCycle();
-#endif //MAINMENU_H
+#endif  // MAINMENU_H

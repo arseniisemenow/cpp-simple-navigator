@@ -6,4 +6,4 @@ namespace s21::constants {
 inline const static int kInfinity = std::numeric_limits<int>::max();
 }
 
-#endif //COMMON_CONSTANTS_H
+#endif  // COMMON_CONSTANTS_H
