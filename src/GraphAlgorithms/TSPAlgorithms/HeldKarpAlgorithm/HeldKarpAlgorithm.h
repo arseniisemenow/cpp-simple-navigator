@@ -37,21 +37,21 @@ class HeldKarpAlgorithm {
       return (current_vertex == other.current_vertex &&
               vertex_set == other.vertex_set);
     }
-  };
 
-  struct IndexHash {
-    std::size_t operator()(const Index& index) const {
-      std::size_t hash = std::hash<int>()(index.current_vertex);
-      for (int vertex : index.vertex_set) {
-        hash ^= std::hash<int>()(vertex);
+    struct Hash {
+      std::size_t operator()(const Index& index) const {
+        std::size_t hash = std::hash<int>()(index.current_vertex);
+        for (const int vertex : index.vertex_set) {
+          hash ^= std::hash<int>()(vertex);
+        }
+        return hash;
       }
-      return hash;
-    }
+    };
   };
 
   std::vector<std::set<int>> sub_sets_{};
-  std::unordered_map<Index, int, IndexHash> min_cost_map_{};
-  std::unordered_map<Index, int, IndexHash> parent_{};
+  std::unordered_map<Index, int, Index::Hash> min_cost_map_{};
+  std::unordered_map<Index, int, Index::Hash> parent_{};
   std::vector<int> path_{};
 
   FRIEND_TEST(GraphAlgorithmsTspAlgorithmHeldKarpAlgorithmTest,

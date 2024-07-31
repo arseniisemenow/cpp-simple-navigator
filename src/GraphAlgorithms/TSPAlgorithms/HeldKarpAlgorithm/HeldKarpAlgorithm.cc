@@ -35,7 +35,8 @@ TspResult HeldKarpAlgorithm::PerformHeldKarpAlgorithm(const Graph& graph) {
 
   IterateThroughSubSets(distances, static_cast<int>(number_of_vertices));
 
-  int total_cost{GetTotalCost(distances, static_cast<int>(number_of_vertices))};
+  const int total_cost{
+      GetTotalCost(distances, static_cast<int>(number_of_vertices))};
   if (total_cost == std::numeric_limits<int>::max()) {
     result.distance = std::numeric_limits<int>::max();
     result.vertices = {};
@@ -57,6 +58,7 @@ void HeldKarpAlgorithm::GenerateSubSets(const int number_of_vertices) {
   auto sub_set_comparator{[](const std::set<int>& a, const std::set<int>& b) {
     return a.size() < b.size();
   }};
+
   std::sort(sub_sets_.begin(), sub_sets_.end(), sub_set_comparator);
 }
 
@@ -91,12 +93,14 @@ void HeldKarpAlgorithm::IterateThroughSubSets(
       int minimum_cost{std::numeric_limits<int>::max()};
       int minimum_previous_vertex{-1};
 
-      for (int previous_vertex : set) {
+      for (const int previous_vertex : set) {
         const int cost_so_far{GetCostSoFar(set, previous_vertex)};
         int cost{};
-        if (distances[previous_vertex][current_vertex] ==
+        const bool is_not_reachable =
+            distances[previous_vertex][current_vertex] ==
                 std::numeric_limits<int>::max() ||
-            cost_so_far == std::numeric_limits<int>::max()) {
+            cost_so_far == std::numeric_limits<int>::max();
+        if (is_not_reachable) {
           cost = std::numeric_limits<int>::max();
         } else {
           cost = distances[previous_vertex][current_vertex] + cost_so_far;
@@ -143,8 +147,10 @@ int HeldKarpAlgorithm::GetTotalCost(
   for (const int vertex : last_set) {
     const int cost_so_far{GetCostSoFar(last_set, vertex)};
     int cost{};
-    if (distances[vertex][0] == std::numeric_limits<int>::max() ||
-        cost_so_far == std::numeric_limits<int>::max()) {
+    bool is_not_reachable =
+        distances[vertex][0] == std::numeric_limits<int>::max() ||
+        cost_so_far == std::numeric_limits<int>::max();
+    if (is_not_reachable) {
       cost = std::numeric_limits<int>::max();
     } else {
       cost = distances[vertex][0] + cost_so_far;
