@@ -55,7 +55,7 @@ std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph,
   visited.insert(start_index - 1);
 
   while (!queue.empty()) {
-    int current = queue.front();
+    const int current = queue.front();
     queue.pop_front();
     result.push_back(current + 1);
 
