@@ -82,3 +82,6 @@ style:
 style_check:
 	@find . -type f \( -name "*.cc" -o -name "*.h" \) -exec clang-format -n -style=Google {} \;
 	@echo "style check is finished"
+
+dvi:
+	@$(OPEN_COMMAND) dvi-folder/README.html

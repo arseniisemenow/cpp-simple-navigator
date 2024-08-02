@@ -1,0 +1,63 @@
+# SimpleNavigator Project
+
+## Gameplay
+
+![alt text](media/gameplay.gif)
+
+## Introduction
+The SimpleNavigator project involves implementing basic algorithms on graphs, a fundamental data structure in programming used for interpreting road maps, geographic maps, social network connections, and more.
+
+## Information
+
+### Historical Background
+The foundation of graph theory was established by Leonard Euler in 1736 with his solution to the Königsberg Bridge problem, which asked whether it was possible to traverse all the bridges of Königsberg without crossing any of them more than once.
+
+### Main Terms
+- **Graph**: A set of vertices connected by edges.
+- **Undirected Graph**: Edges allow movement in any direction.
+- **Directed Graph**: Edges (arcs) have a direction.
+- **Weighted Graph**: Edges have weights.
+- **Tree**: A connected acyclic graph.
+- **Spanning Tree**: A subgraph that includes all vertices of the original graph and is a tree.
+
+### Ways of Representing a Graph
+- **Adjacency Matrix**
+- **Incidence Matrix**
+- **Adjacency List**
+- **List of Edges**
+
+## Project Implementation
+
+### Part 1: Depth- and Breadth-First Search
+- **Library**: `s21_graph` (Graph class)
+- **DepthFirstSearch** and **BreadthFirstSearch** implemented in `s21_graph_algorithms` using custom Stack and Queue classes.
+
+### Part 2: Finding the Shortest Paths
+- **Methods**:
+    - `GetShortestPathBetweenVertices` (Dijkstra's algorithm)
+    - `GetShortestPathsBetweenAllVertices` (Floyd-Warshall algorithm)
+
+### Part 3: Finding the Minimum Spanning Tree
+- **Method**: `GetLeastSpanningTree` (Prim's algorithm)
+
+### Part 4: Traveling Salesman Problem
+- **Method**: `(Ant Colony algorithm)` 
+- **Method**: `(Held-Karp algorithm)` 
+- **Method**: `(Genetic algorithm)` 
+
+### Part 5: Console Interface
+- Load graph from a file
+- Perform and display results of depth-first and breadth-first searches
+- Find and display shortest paths between vertices
+- Find and display minimum spanning tree
+- Solve and display the Traveling Salesman Problem
+
+### Part 6: Comparison of Methods for Solving the Traveling Salesman Problem
+- Implement and compare three algorithms for the Traveling Salesman Problem.
+- Measure and display execution time for each algorithm over N iterations.
+
+## How to Use
+1. Clone the repository.
+2. Run the console application using ```make cli```:
+    - Load graphs, perform searches, find shortest paths, minimum spanning trees, and solve the Traveling Salesman Problem.
+
