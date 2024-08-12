@@ -1,6 +1,6 @@
 #include "FilePathHandler.h"
 
-#include <__filesystem/recursive_directory_iterator.h>
+#include <filesystem>
 #include <dirent.h>
 #include <ncurses.h>
 #include <unistd.h>
