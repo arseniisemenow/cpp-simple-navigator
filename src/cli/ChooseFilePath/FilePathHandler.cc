@@ -1,6 +1,5 @@
 #include "FilePathHandler.h"
 
-#include <filesystem>
 #include <dirent.h>
 #include <ncurses.h>
 #include <unistd.h>
