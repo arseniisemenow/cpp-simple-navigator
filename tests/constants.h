@@ -6,12 +6,18 @@
 namespace s21::constants {
 
 inline const std::string kFileNames[] = {
-    "tests/datasets/graph_1.txt",  "tests/datasets/graph_2.txt",
-    "tests/datasets/graph_3.txt",  "tests/datasets/graph_4.txt",
-    "tests/datasets/graph_5.txt",  "tests/datasets/graph_6.txt",
-    "tests/datasets/graph_7.txt",  "tests/datasets/graph_8.txt",
-    "tests/datasets/graph_9.txt",  "tests/datasets/graph_10.txt",
-    "tests/datasets/graph_11.txt", "tests/datasets/graph_12.txt",
+    "tests/datasets/graph_1_size_11.txt",
+    "tests/datasets/graph_2_size_4.txt",
+    "tests/datasets/graph_3_size_10.txt",
+    "tests/datasets/graph_4_size_7.txt",
+    "tests/datasets/graph_5_size_6.txt",
+    "tests/datasets/graph_6_size_6.txt",
+    "tests/datasets/graph_7_size_6.txt",
+    "tests/datasets/graph_8_size_4.txt",
+    "tests/datasets/graph_9_size_6.txt",
+    "tests/datasets/graph_10_size_42.txt",
+    "tests/datasets/graph_11_size_17.txt",
+    "tests/datasets/graph_12_size_48.txt",
 };
 inline const std::string kFileNamesDot[] = {
     "tests/datasets/graph_1.dot", "tests/datasets/graph_2.dot",
