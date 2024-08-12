@@ -10,6 +10,13 @@ CLI_TARGET=cli
 GRAPH_LIBRARY_NAME=s21_graph
 GRAPH_ALGORITHMS_LIBRARY_NAME=s21_graph_algorithms
 
+OPEN_COMMAND:=open
+OS_NAME := $(shell uname -o 2>/dev/null || echo "Unknown")
+ifeq ($(OS_NAME), GNU/Linux) # place here all differ variables
+    OPEN_COMMAND := xdg-open
+endif
+
+
 all: test s21_graph
 
 init_cmake:
@@ -42,8 +49,16 @@ s21_graph_algorithms_shortest_path_engine_test: init_cmake
 	cmake --build ${BUILD_PATH} --target ${TEST_SHORTEST_PATH_ENGINE_TARGET} -j 4
 	${BUILD_PATH}/${TEST_SHORTEST_PATH_ENGINE_TARGET}
 
+
 cli: init_cmake
 	cmake --build ${BUILD_PATH} --target ${CLI_TARGET} -j 4
+	${BUILD_PATH}/${CLI_TARGET}
+
+build: cli
+
+rebuild: cli
+
+run:
 	${BUILD_PATH}/${CLI_TARGET}
 
 clean: clean_project clean_static_lib clean_log clean_exec clean_obj clean_gcov clean_lcov clean_lcov_report

@@ -2,10 +2,8 @@
 #define A2_SIMPLENAVIGATOR_V1_0_CPP_1_SRC_GRAPHALGORITHMS_SEARCHENGINE_SEARCHENGINE_H_
 
 #include <iostream>
-#include <unordered_set>
 
 #include "Graph/Graph.h"
-#include "containers/adaptors/Queue/Queue.h"
 
 namespace s21 {
 

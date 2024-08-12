@@ -1,8 +1,9 @@
 #include "SearchEngine.h"
 
-#include <list>
-#include <stack>
 #include <unordered_set>
+
+#include "containers/adaptors/Stack/Stack.h"
+#include "containers/adaptors/Queue/Queue.h"
 
 namespace s21 {
 
@@ -17,7 +18,7 @@ std::vector<int> SearchEngine::DepthFirstSearch(const Graph &graph,
 
   std::vector<int> result;
   std::unordered_set<int> visited;
-  std::stack<int> stack;
+  Stack<int> stack;
   stack.push(start_index - 1);
 
   while (!stack.empty()) {
@@ -50,19 +51,19 @@ std::vector<int> SearchEngine::BreadthFirstSearch(const Graph &graph,
   }
   std::vector<int> result;
   std::unordered_set<int> visited;
-  std::list<int> queue;
-  queue.push_back(start_index - 1);
+  Queue<int> queue;
+  queue.push(start_index - 1);
   visited.insert(start_index - 1);
 
   while (!queue.empty()) {
     const int current = queue.front();
-    queue.pop_front();
+    queue.pop();
     result.push_back(current + 1);
 
     for (size_t i = 0; i < graph.GetGraph().size(); ++i) {
       if (graph.GetGraph()[current][i] != 0 &&
           visited.find(i) == visited.end()) {
-        queue.push_back(i);
+        queue.push(i);
         visited.insert(i);
       }
     }

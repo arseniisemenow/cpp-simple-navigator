@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <initializer_list>
 
-#include "containers/sequence/list/List.h"
+#include "containers/sequence/List/List.h"
 
 namespace s21 {
 template <typename T, class Container = List<T>>
