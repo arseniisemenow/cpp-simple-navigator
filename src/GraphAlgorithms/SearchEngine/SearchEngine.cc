@@ -2,8 +2,8 @@
 
 #include <unordered_set>
 
-#include "containers/adaptors/Stack/Stack.h"
 #include "containers/adaptors/Queue/Queue.h"
+#include "containers/adaptors/Stack/Stack.h"
 
 namespace s21 {
 
