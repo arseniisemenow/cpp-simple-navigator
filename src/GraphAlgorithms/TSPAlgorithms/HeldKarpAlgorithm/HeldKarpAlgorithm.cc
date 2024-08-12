@@ -13,6 +13,7 @@ TspResult HeldKarpAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
 }
 
 TspResult HeldKarpAlgorithm::PerformHeldKarpAlgorithm(const Graph& graph) {
+  if (graph.IsEmpty()) return {};
   TspResult result{};
 
   sub_sets_.clear();

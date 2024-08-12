@@ -13,6 +13,7 @@ inline constexpr int kNumberOfGenerations{200};
 
 namespace s21 {
 TspResult GeneticAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
+  if (graph.IsEmpty()) return {};
   TspResult result{};
 
   distances_.clear();

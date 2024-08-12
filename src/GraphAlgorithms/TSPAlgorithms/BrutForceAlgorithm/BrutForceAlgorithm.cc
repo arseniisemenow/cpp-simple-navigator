@@ -10,6 +10,7 @@ namespace s21 {
 
 TspResult BrutForceAlgorithm::SolveTravelingSalesmanProblem(
     const Graph& graph) {
+  if (graph.IsEmpty()) return {};
   int num_vertices = graph.GetSize();
 
   std::vector<int> vertices(num_vertices - 1);

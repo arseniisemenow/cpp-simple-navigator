@@ -108,6 +108,7 @@ void EvaporatePheromone(std::vector<std::vector<double>>& pheromone) {
 }
 
 TspResult ColonyAlgorithm::SolveTravelingSalesmanProblem(const Graph& graph) {
+  if (graph.IsEmpty()) return {};
   const int num_vertices = graph.GetSize();
   std::vector<std::vector<double>> pheromone(num_vertices,
                                              std::vector<double>(num_vertices));
