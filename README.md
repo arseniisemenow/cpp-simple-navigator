@@ -2,7 +2,7 @@
 
 ## Gameplay
 
-![alt text](media/gameplay.gif)
+![alt text](dvi-folder/media/gameplay.gif)
 
 ## Introduction
 The SimpleNavigator project involves implementing basic algorithms on graphs, a fundamental data structure in programming used for interpreting road maps, geographic maps, social network connections, and more.
