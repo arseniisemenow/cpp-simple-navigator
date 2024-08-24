@@ -1,5 +1,10 @@
 # SimpleNavigator Project
 
+## Team members
+- [theseChains](https://github.com/theseChains)
+- [arseniisemenow](https://github.com/arseniisemenow)
+
+
 ## Gameplay
 
 ![alt text](dvi-folder/media/gameplay.gif)
